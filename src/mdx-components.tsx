@@ -1,0 +1,28 @@
+import type { MDXComponents } from "mdx/types";
+import { EngineDiagram } from "@/components/interactive/EngineDiagram";
+import { StringInStringOut } from "@/components/interactive/StringInStringOut";
+import { Tokenizer } from "@/components/interactive/Tokenizer";
+import { TrainingProgression } from "@/components/interactive/TrainingProgression";
+import { MultiplicationLab } from "@/components/interactive/MultiplicationLab";
+import { Grounding } from "@/components/interactive/Grounding";
+import { ContextWindow } from "@/components/interactive/ContextWindow";
+import { ContextFill } from "@/components/interactive/ContextFill";
+import { Memory } from "@/components/interactive/Memory";
+import { HarvardAtlas } from "@/components/HarvardAtlas";
+
+// Registered globally so .mdx files can use these as bare tags (no import).
+export function useMDXComponents(components: MDXComponents): MDXComponents {
+  return {
+    ...components,
+    EngineDiagram,
+    StringInStringOut,
+    Tokenizer,
+    TrainingProgression,
+    MultiplicationLab,
+    Grounding,
+    ContextWindow,
+    ContextFill,
+    Memory,
+    HarvardAtlas,
+  };
+}

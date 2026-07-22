@@ -1,0 +1,142 @@
+{/*
+  ─────────────────────────────────────────────────────────────────────────
+  THE ENTIRE HOME PAGE'S TEXT LIVES IN THIS ONE FILE.
+  • The hero (title, subtitle, lede) is the <section> just below.
+  • Everything after it is plain Markdown: ## is a heading, **bold**, [links](/x),
+    and the <Widgets /> are the interactives — move or delete them freely.
+  • Don't touch the className="..." bits — those are just styling hooks.
+  ─────────────────────────────────────────────────────────────────────────
+*/}
+
+<section className="hero">
+  <span className="plate-label">Field Guide · Bok Center · Plate I</span>
+  <h1 className="hero-title">
+    The Bok Field Guide to Generative AI
+    <span className="hero-title-sub">in Higher Education</span>
+  </h1>
+  <hr className="hero-rule" />
+  <p className="hero-lede">
+    Like any field guide, this one teaches you to identify what you are looking at. It organizes the AI tools reaching your classroom not by brand, but by how much of the machine they let you see — starting with the engine underneath and ending with what Harvard provides members of the FAS. 
+  </p>
+</section>
+
+<div className="reading prose">
+
+<p className="drop-cap">Every week a new AI tool appears-- chat windows, writing assistants, research companions, autonomous agents. They look nothing alike. But they are all built on the same engine — and once you understand that engine, you can make sense of any tool, current or future, because you know what it is actually doing underneath.</p>
+
+This guide is for teachers, and assumes no code. It starts at the center — the exchange every one of these tools wraps around — and works outward to the specific tools Harvard provides, so that when a colleague mentions "the CLI" or "a custom GPT," you can place it on a map.
+
+## First, what do we mean by "AI"?
+
+*Machine learning* — systems that improve at a task by finding patterns in data — has run spam filters and recommendations for years. What's new is **generative** models: systems that produce new text, images, audio, or video.
+
+Even here there is more than one kind of machine. The same companies build **diffusion models** for images (DALL·E, Imagen); we set those aside. Our subject is the **large language model**, or LLM: the text-in, text-out engine behind Claude, ChatGPT, and Gemini. It is what nearly every AI tool reaching your classroom is made of.
+
+We won't cover how an LLM is built or trained — that story is told well elsewhere by Andrej Karpathy, [*Deep Dive into LLMs like ChatGPT*](https://www.youtube.com/watch?v=7xTGNNLPyMI). 
+
+What you need is a feel for the materiality of LLMs (the "under the hood" understanding of processes, the strengths and constraints, etc.). This should be enough to get your bearings and to parse what a given AI tool is actually doing. A few short demonstrations follow to help give you exactly those intuitions.
+
+## The engine: string in, string out
+
+An LLM is, at its core, a function: a string of text goes in, a string of text comes out.
+
+<EngineDiagram />
+
+Try the exchange, then flip it to see what the model holds:
+
+<StringInStringOut />
+
+Every tool in this guide packages operations around this one exchange. Text in, text out; everything else is scaffolding.
+
+## It's all tokens
+
+Flip that demo to "what the model sees" and the words become numbers — literally. The model never sees letters. Text enters as a sequence of integers called **tokens**: fragments of text, each mapped to a number. It predicts the next *token*, not the next word.
+
+<Tokenizer />
+
+The splits aren't ours — they reflect what the model saw at scale. This is why models miscount letters and stumble on rare names.
+
+## How it learned to write
+
+So how did numbers ever become good text? By prediction, practiced at enormous scale. A model learns exactly one move — *given the text so far, guess what comes next* — and repeats it, billions of times, against a vast library of writing.
+
+The New York Times built a tiny version you can watch learn. Their [*BabyGPT*](https://www.nytimes.com/interactive/2023/04/26/upshot/gpt-from-scratch.html) is trained on the novels of Jane Austen and does just one thing: predict the next character, over and over, until a sentence forms. At first it produces pure noise. No one programs in spelling, words, or grammar — those emerge, rung by rung, purely from predicting the next character against Austen's prose. Click through its training:
+
+<TrainingProgression />
+
+A small model emits gibberish; trained longer, it finds words, then grammar, then a recognizable voice. Now scale that up — billions of parameters, trained on a large fraction of everything ever written — and "the likely next token" reads as fluent thought. That is roughly where today's frontier models sit. As the *Times* piece shows, nothing here is copied or looked up; the structure of language is *reconstructed*, one prediction at a time.
+
+## So it must be good at math?
+
+It runs entirely on numbers. Here are two; ask it to multiply them, no calculator, before reading on.
+
+<MultiplicationLab />
+
+## The same failure, in words
+
+It isn't only math. Ask a model to close-read a real scene — once cold, once with the text in front of it:
+
+<Grounding />
+
+Two failures, one shape. The model has two hard limits: it can't reliably compute or recall the actual world, and it can only hold so much in view at once. Nearly every tool you'll meet exists to manage those two limits — feeding it the right inputs, and carrying its outputs.
+
+## Everything lands in the context window
+
+Take the second limit — what it can hold. Think of the input as a course pack for a brilliant student who hasn't done the reading: give it the passage, the rubric, an example of the move you want, and it follows your lead. But your prompt, its reply, your next message, and its next all accumulate in one fixed-size **context window**. Spend that budget on high-signal context and it guesses less; overspend and quality drops — the model gets lost in the middle.
+
+<ContextWindow />
+
+And the budget doesn't reset between messages — it fills as the conversation grows. Watch a thread stack up, and see what happens when it runs out of room:
+
+<ContextFill />
+
+When the window fills, most tools **compact** rather than stop: they summarize the older turns and pass the summary forward, so the chat feels seamless. The catch is that the model is now reasoning from a compressed, lossy recap — the reason a very long thread quietly loses the thread.
+
+## Memory: the first automatic context
+
+If every new chat opens a blank window, how does a tool ever seem to remember you? By keeping a **memory** — a small note it writes and quietly loads into each new thread. It's the simplest form of *automatic context*: context you never pasted, added for you.
+
+<Memory />
+
+## Why the tools exist
+
+The model's limits and its finite window are what the whole ecosystem of tools is built to manage — and the space you work in as an applied user. Curating that input well has a name:
+
+<blockquote>
+  <p><em>"Good context engineering means finding the smallest possible set of high-signal tokens that maximize the likelihood of some desired outcome."</em></p>
+  <cite>— Anthropic, "Building Effective Agents"</cite>
+</blockquote>
+
+## Handling the output: from copy-paste to automation
+
+Context solves the input side. But what about the output?
+
+In the earliest way of working, you'd get text back from the chat window, read it, copy it, paste it into a file or a document, and take it somewhere else to see if it worked. If it didn't, you'd go back to the chat, describe what went wrong, and iterate. The string came out of the model, and then *you* had to carry it the rest of the way.
+
+The evolution of these tools is largely the story of automating that carry. As you read the tiers below, ask one question: *do I want to see what's happening, or have it handled for me?* The right answer changes with the stakes.
+
+**Chat interfaces** are the exchange at its most literal. You put in a prompt in natural language and read a reply; then you copy what's useful somewhere else to make use of it. String-in, string-out at its most direct. *(Claude.ai, ChatGPT, Gemini in the browser.)*
+
+**In-chat live environments** were the first step toward automating the carry. Platforms added inline execution directly inside the chat — ChatGPT's Code Interpreter, Claude's Artifacts, Gemini's Canvas. Now you could see the output *run* — a chart drawn, a document rendered, a page previewed — without leaving the conversation. The string went in, the string came out, and you could watch it work in the same window.
+
+**Editor and document panels** were the next move. Tools like Cursor, Windsurf, and VS Code with Copilot — or Gemini inside a Google Doc — put the model inside the tool where you already work. Now the model didn't just generate text in a chat bubble; it could read your existing files, understand your project or document, and write changes directly in place. The input got richer (your whole project as context) and the output got more useful (edits applied where you need them, not copy-pasted).
+
+**Command-line tools** took this further. Tools like Claude Code and Codex run in your terminal and can access your entire machine — not just one project, but your file system, your history, your installed programs. The context window now extends to everything on your local device, and the output can be written anywhere.
+
+**All-in-one platforms** like Lovable, Replit, and Bolt approach it from the other direction. Instead of giving developers more control, they give non-developers less friction. These tools handle not just the generation but the deployment, the setup, the provisioning. You describe what you want and the platform handles the entire pipeline — input to output to a running application. You don't need to know what a build system is.
+
+**Autonomous agents** are the final step, so far. Agent modes in Cursor and Claude Code — and standalone agents — don't wait for your prompts. You give them access to your files, your tools, and your keys — the proverbial keys to the car — and a persistent memory, and they drive. You don't control the string in or the string out; you rarely even see the intermediate steps. You just see the final product. This is powerful, and it is genuinely dangerous: an agent can rack up costs, introduce errors, and make irreversible changes without asking.
+
+Notice that the *engine* never changed. A string goes into a model and a string comes out, at every tier. What changes is how many layers sit between you and that exchange — and whether, for the task at hand, those layers help or hide.
+
+## The map: what Harvard puts on your desk
+
+Harvard FAS provides affiliates access to all three major providers — **Claude, ChatGPT, and Gemini** — and each appears in several of the surfaces above at once. The same engine, wearing four different coats.
+
+The atlas arranges them: providers down the side, surfaces across the top, ordered left-to-right from "you see every string" to "the tool handles more for you." When a new tool appears next year, you'll be able to drop it into this same grid.
+
+<HarvardAtlas />
+
+From here the guide turns from *the tools* to *the teaching*: how to build a course solid enough that AI strengthens it rather than hollows it out. That's the [pyramid](/teaching).
+
+</div>

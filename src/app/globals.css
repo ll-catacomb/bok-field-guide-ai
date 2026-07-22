@@ -1,0 +1,562 @@
+@import "tailwindcss";
+
+@theme {
+  /* White ground — clean paper, no sepia. Ink is warm near-black. */
+  --color-paper: #ffffff;
+  --color-paper-deep: #f4f3f1;
+  --color-ink: #1a1817;
+  --color-ink-soft: #3a3938;
+  --color-ash: #6b6359;
+  --color-rule: #2a2825;
+
+  /* Void palette — reserved for the rare dark "engine room" inset */
+  --color-void: #0d0c0b;
+  --color-void-deep: #070706;
+  --color-bone: #ede6d6;
+  --color-bone-soft: #a89f8e;
+  --color-patina: #5c5448;
+
+  /* Accent — Harvard crimson, the single accent site-wide */
+  --color-crimson: #a51c30;
+  --color-crimson-light: #c8324a;
+  --color-crimson-deep: #7a1424;
+  --color-gold: #b6914a;
+
+  /* Typography (family values injected from next/font via CSS vars in layout.tsx) */
+  --font-display: var(--font-fraunces), "GT Sectra", Georgia, serif;
+  --font-gothic: var(--font-gothic), "UnifrakturMaguntia", var(--font-fraunces), serif;
+  --font-body: var(--font-garamond), "EB Garamond", "Source Serif 4", Georgia, serif;
+  --font-mono: var(--font-mono), "IBM Plex Mono", "JetBrains Mono", ui-monospace, monospace;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.55;
+  font-feature-settings: "onum", "kern", "liga";
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Two grain layers make the "faded ink on white paper" look:
+   1. paper grain — a faint MULTIPLY wash that adds tooth to the white ground.
+   2. ink grain — a LIGHTEN speckle that only bites into the dark areas (text,
+      rules, crimson), eroding them like risograph/letterpress ink. Over white
+      it does nothing, so the page stays clean white while the type looks faded. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.045;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>");
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.42;
+  mix-blend-mode: lighten;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/></filter><rect width='160' height='160' filter='url(%23g)'/></svg>");
+  background-size: 160px 160px;
+}
+
+/* Keep real content between the two grain layers. */
+#app-root {
+  position: relative;
+  z-index: 2;
+}
+
+/* — typography helpers — */
+
+.font-gothic {
+  font-family: var(--font-gothic);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* — catalog primitives (ported from personal-website) — */
+
+.catalog-stripe {
+  position: fixed;
+  left: 1.25rem;
+  top: 0;
+  bottom: 0;
+  width: 1rem;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.catalog-stripe span {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-ash);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  white-space: nowrap;
+}
+
+.tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-ash);
+}
+
+.annotation {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-ash);
+}
+
+.annotation::before {
+  content: "-";
+  margin-right: 0.25em;
+}
+
+.marginalia {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--color-ash);
+  letter-spacing: 0.02em;
+}
+
+.drop-cap::first-letter {
+  font-family: var(--font-gothic);
+  font-weight: 400;
+  font-size: 5.5rem;
+  line-height: 0.7;
+  float: left;
+  padding-right: 0.5rem;
+  padding-top: 0.35rem;
+  color: var(--color-crimson);
+}
+
+.rule-gold {
+  border: 0;
+  height: 1px;
+  background: var(--color-gold);
+  margin: 2.5rem 0;
+}
+
+.rule-crimson {
+  border: 0;
+  height: 2px;
+  width: 4rem;
+  background: var(--color-crimson);
+  margin: 1.5rem 0;
+}
+
+/* Resource / further-reading lists (Bok Center guidance links). */
+.resource-list {
+  list-style: none;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.resource-list li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--color-crimson);
+}
+
+.resource-list a {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  letter-spacing: 0.01em;
+  color: var(--color-crimson);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(165, 28, 48, 0.3);
+  align-self: flex-start;
+  padding-bottom: 1px;
+}
+
+.resource-list a:hover {
+  border-bottom-color: var(--color-crimson);
+}
+
+.resource-blurb {
+  font-size: 14px;
+  color: var(--color-ink-soft);
+  line-height: 1.45;
+}
+
+.placeholder-artifact {
+  background:
+    repeating-linear-gradient(
+      45deg,
+      transparent 0,
+      transparent 14px,
+      rgba(26, 24, 23, 0.05) 14px,
+      rgba(26, 24, 23, 0.05) 15px
+    ),
+    var(--color-paper-deep);
+  border: 1px solid var(--color-rule);
+  aspect-ratio: 3 / 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-ash);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-align: center;
+}
+
+/* — long-form reading column & prose (the tutorial body) — */
+
+.reading {
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.prose h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  margin: 3.25rem 0 1rem;
+}
+
+.prose h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.3rem;
+  line-height: 1.15;
+  margin: 2.25rem 0 0.75rem;
+}
+
+.prose p {
+  margin: 0 0 1.3rem;
+  font-size: 1.2rem;
+  line-height: 1.65;
+}
+
+.prose li {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+.prose a {
+  color: var(--color-crimson);
+  text-decoration: underline;
+  text-decoration-color: rgba(165, 28, 48, 0.35);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 200ms ease;
+}
+
+.prose a:hover {
+  text-decoration-color: var(--color-crimson);
+}
+
+.prose strong {
+  font-weight: 600;
+}
+
+.prose blockquote {
+  margin: 1.75rem 0;
+  padding: 0.25rem 0 0.25rem 1.25rem;
+  border-left: 2px solid var(--color-crimson);
+  font-style: italic;
+  color: var(--color-ink-soft);
+}
+
+.prose blockquote cite {
+  display: block;
+  margin-top: 0.5rem;
+  font-style: normal;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  color: var(--color-ash);
+}
+
+/* Monospace figure blocks (the ASCII diagrams from the source pages). */
+.prose pre,
+.figure-mono {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.5;
+  background: var(--color-paper-deep);
+  border: 1px solid var(--color-rule);
+  padding: 1.25rem;
+  overflow-x: auto;
+  margin: 1.75rem 0;
+  color: var(--color-ink-soft);
+}
+
+.prose :not(pre) > code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: var(--color-paper-deep);
+  padding: 0.1em 0.35em;
+  border-radius: 2px;
+}
+
+/* — interactive frame — a bordered inset that says "try it" — */
+
+.interactive {
+  margin: 2.5rem 0;
+  border: 1px solid var(--color-rule);
+  background: var(--color-paper-deep);
+}
+
+.interactive-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid var(--color-rule);
+  background: var(--color-paper);
+}
+
+.interactive-head .label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-crimson);
+}
+
+.interactive-head .kicker {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-ash);
+}
+
+.interactive-body {
+  padding: 1.25rem 1rem 1.5rem;
+}
+
+/* Small form controls shared across interactives. */
+.ctl-input {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  background: var(--color-paper);
+  border: 1px solid var(--color-rule);
+  color: var(--color-ink);
+  padding: 0.5rem 0.6rem;
+  width: 100%;
+}
+
+.ctl-input:focus {
+  outline: 2px solid var(--color-crimson);
+  outline-offset: -1px;
+}
+
+.btn {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  border: 1px solid var(--color-ink);
+  padding: 0.5rem 0.9rem;
+  cursor: pointer;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.btn:hover {
+  background: var(--color-crimson);
+  border-color: var(--color-crimson);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--color-ink);
+}
+
+.btn-ghost:hover {
+  background: transparent;
+  color: var(--color-crimson);
+  border-color: var(--color-crimson);
+}
+
+.btn[aria-pressed="true"] {
+  background: var(--color-crimson);
+  border-color: var(--color-crimson);
+  color: var(--color-paper);
+}
+
+/* — site chrome — */
+
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem clamp(1rem, 4vw, 2.5rem);
+  background: color-mix(in srgb, var(--color-paper) 88%, transparent);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.site-nav .brand {
+  font-family: var(--font-gothic);
+  font-size: 1.35rem;
+  color: var(--color-ink);
+  text-decoration: none;
+  line-height: 1;
+}
+
+.site-nav .links {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.site-nav .links a {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ash);
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.site-nav .links a:hover,
+.site-nav .links a[aria-current="page"] {
+  color: var(--color-crimson);
+}
+
+.site-footer {
+  border-top: 1px solid var(--color-rule);
+  margin-top: 5rem;
+  padding: 2rem clamp(1rem, 4vw, 2.5rem);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--color-ash);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  justify-content: space-between;
+}
+
+/* — hero — */
+
+.hero {
+  position: relative;
+  padding: clamp(3.5rem, 9vw, 7rem) 1.5rem clamp(2rem, 5vw, 3.5rem);
+  max-width: 60rem;
+  margin: 0 auto;
+}
+
+.hero-kicker {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-ash);
+}
+
+/* Field-guide furniture — a plate number, a specimen-style Latin line, and the
+   double keel-rule you find under a field guide's plate title. */
+.plate-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-ash);
+  border: 1px solid var(--color-rule);
+  padding: 4px 9px;
+}
+
+.hero-species {
+  margin: 0.85rem 0 0;
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: clamp(1rem, 2.1vw, 1.3rem);
+  color: var(--color-ash);
+  letter-spacing: 0.01em;
+}
+
+.hero-species .binomial {
+  color: var(--color-ink-soft);
+}
+
+.hero-rule {
+  border: 0;
+  border-top: 1px solid var(--color-rule);
+  border-bottom: 1px solid var(--color-rule);
+  height: 3px;
+  width: 100%;
+  max-width: 9rem;
+  margin: 1.5rem 0;
+}
+
+.hero-title {
+  font-family: var(--font-gothic);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 8vw, 5.5rem);
+  line-height: 0.98;
+  letter-spacing: 0.005em;
+  margin: 1rem 0 0;
+  color: var(--color-ink);
+}
+
+.hero-title-sub {
+  display: block;
+  font-size: 0.5em;
+  line-height: 1.1;
+  margin-top: 0.15em;
+}
+
+.hero-lede {
+  font-family: var(--font-body);
+  font-size: clamp(1.2rem, 2vw, 1.45rem);
+  line-height: 1.55;
+  color: var(--color-ink-soft);
+  max-width: 40rem;
+  margin: 1.25rem 0 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
