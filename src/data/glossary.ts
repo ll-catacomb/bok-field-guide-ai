@@ -44,8 +44,8 @@ export const GLOSSARY: Record<string, GlossaryEntry> = {
   token: {
     term: "Token",
     definition:
-      "The unit a model actually reads. Text is split into tokens — whole words, word-fragments, or characters — each mapped to an integer. The model predicts the next token, not the next letter or word, which is why it can miscount letters or stumble on rare names.",
-    aliases: ["tokens"],
+      "The unit a model actually reads. Text is split into tokens — whole words, word-fragments, or characters — each mapped to an integer. The model predicts the next token, not the next letter or word, which is why it can miscount letters or stumble on rare names. (A tokenizer is the tool that does the splitting.)",
+    aliases: ["tokens", "tokenizer", "tokenization"],
   },
   parameters: {
     term: "Parameters",
@@ -141,6 +141,30 @@ export const GLOSSARY: Record<string, GlossaryEntry> = {
     links: [
       { text: "modelcontextprotocol.io", href: "https://modelcontextprotocol.io" },
     ],
+  },
+  grounding: {
+    term: "Grounding",
+    definition:
+      "Giving the model the actual source — the passage, the data, the document — so it answers from what's in front of it instead of guessing from memory. The direct remedy for hallucination, a confident but made-up answer.",
+    aliases: ["grounded", "hallucination", "hallucinate"],
+  },
+  corpus: {
+    term: "Corpus",
+    definition:
+      "A body of texts treated as a single dataset — a poet's collected works, a term's worth of transcripts, hundreds of song lyrics — handed to a model to read or search as a whole.",
+    aliases: ["corpora"],
+  },
+  notebooklm: {
+    term: "NotebookLM",
+    definition:
+      "Google's tool for building a small assistant grounded in documents you upload: it answers questions, cites the sources, and won't stray beyond them. A common no-code way to make a source-grounded course helper.",
+    aliases: ["Notebook LM"],
+  },
+  "custom-gpt": {
+    term: "Custom GPT",
+    definition:
+      "A reusable ChatGPT configured with your own instructions and reference files, so it behaves a set way every time — the OpenAI counterpart to Claude Projects and Gemini Gems.",
+    aliases: ["custom GPTs", "GPTs"],
   },
   agent: {
     term: "Agent",

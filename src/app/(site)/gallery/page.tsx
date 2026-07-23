@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CatalogStripe } from "@/components/CatalogStripe";
+import { TermText } from "@/components/TermText";
 import { PROJECTS, TIER_LABEL } from "@/data/projects";
 
 export const metadata: Metadata = {
@@ -44,8 +45,12 @@ export default function GalleryPage() {
                   <span className="gal-status tag">{p.status}</span>
                 </div>
                 <h2 className="gal-title font-display">{p.title}</h2>
-                <p className="gal-epithet">{p.epithet}</p>
-                <p className="gal-blurb">{p.blurb}</p>
+                <p className="gal-epithet">
+                  <TermText>{p.epithet}</TermText>
+                </p>
+                <p className="gal-blurb">
+                  <TermText>{p.blurb}</TermText>
+                </p>
               </div>
             </article>
           ))}

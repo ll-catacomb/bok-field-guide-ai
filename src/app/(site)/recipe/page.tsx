@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { CatalogStripe } from "@/components/CatalogStripe";
+import { Term } from "@/components/Term";
+import { TermText } from "@/components/TermText";
 import { RECIPES } from "@/data/recipes";
 
 export const metadata: Metadata = {
@@ -34,8 +36,9 @@ export default function RecipePage() {
 
       <article className="reading prose">
         <p className="drop-cap">
-          Every project we built in the workshops has the same three parts. The
-          context window itself is a recipe card: <strong>ingredients</strong> are
+          Every project we built in the workshops has the same three parts. The{" "}
+          <Term id="context-window">context window</Term> itself is a recipe card:{" "}
+          <strong>ingredients</strong> are
           your inputs — the files, data, and examples you bring; <strong>steps</strong>{" "}
           are the operations and prompts, in order; and the <strong>dish</strong>{" "}
           is your output — the page, the rubric, the dataset, the site. Another way
@@ -104,7 +107,9 @@ export default function RecipePage() {
                   <span className="rc-label">Ingredients</span>
                   <ul>
                     {r.ingredients.map((x) => (
-                      <li key={x}>{x}</li>
+                      <li key={x}>
+                        <TermText>{x}</TermText>
+                      </li>
                     ))}
                   </ul>
                 </div>
@@ -112,16 +117,22 @@ export default function RecipePage() {
                   <span className="rc-label">Steps</span>
                   <ol>
                     {r.steps.map((x) => (
-                      <li key={x}>{x}</li>
+                      <li key={x}>
+                        <TermText>{x}</TermText>
+                      </li>
                     ))}
                   </ol>
                 </div>
                 <div className="rc-section rc-section-dish">
                   <span className="rc-label">Dish</span>
-                  <p>{r.dish}</p>
+                  <p>
+                    <TermText>{r.dish}</TermText>
+                  </p>
                 </div>
               </div>
-              <p className="rc-why">{r.why}</p>
+              <p className="rc-why">
+                <TermText>{r.why}</TermText>
+              </p>
             </article>
           ))}
         </div>
