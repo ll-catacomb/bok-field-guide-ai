@@ -1,73 +1,126 @@
-"use client";
-
+// Not a client module: these are pure helpers that produce <Term> (client)
+// elements, so they can run during server render (the MDX <p>/<li> overrides).
 import React from "react";
 import { Term } from "./Term";
 
-// Wraps distinctive glossary phrases inside a plain string of data-driven text
-// (pyramid tiers, gallery blurbs, recipe steps) so they get hover cards without
-// hand-editing every data file. Deliberately conservative: only multi-word or
-// unambiguous phrases are listed, each id is wrapped at most once per string,
-// matches must sit on word boundaries, and matches never overlap. Longer, more
-// specific phrases are listed first so they win.
-const PHRASES: { phrase: string; id: string }[] = [
-  { phrase: "retrieval-augmented generation", id: "rag" },
+// Auto-glossary. Wraps EVERY occurrence of a curated set of distinctive terms
+// so each gets its own hover card, wherever the word appears. Two entry points:
+//   • wrapChildren(children) — recursive, for React trees (MDX <p>/<li>). Skips
+//     existing <Term> and <a>/<code> so nothing double-wraps.
+//   • <TermText>{string}</TermText> — for plain data-driven strings.
+// The list is deliberately conservative: multi-word phrases, domain acronyms
+// (case-sensitive), and unambiguous single words only — never bare "model",
+// "context", "key", "window", "prompt", "parameters".
+type Phrase = { phrase: string; id: string; cs?: boolean };
+
+const PHRASES: Phrase[] = [
   { phrase: "Model Context Protocol", id: "mcp" },
-  { phrase: "large language model", id: "llm" },
+  { phrase: "context engineering", id: "context-engineering" },
   { phrase: "context window", id: "context-window" },
+  { phrase: "machine learning", id: "machine-learning" },
   { phrase: "custom GPTs", id: "custom-gpt" },
   { phrase: "custom GPT", id: "custom-gpt" },
+  { phrase: "secret key", id: "api-key" },
+  { phrase: "tool calls", id: "tool-call" },
+  { phrase: "tool call", id: "tool-call" },
   { phrase: "NotebookLM", id: "notebooklm" },
   { phrase: "tokenization", id: "token" },
   { phrase: "tokenizer", id: "token" },
+  { phrase: "hallucination", id: "grounding" },
+  { phrase: "compaction", id: "compaction" },
+  { phrase: "embeddings", id: "embedding" },
+  { phrase: "embedding", id: "embedding" },
+  { phrase: "generative", id: "generative" },
+  { phrase: "diffusion", id: "diffusion" },
   { phrase: "grounding", id: "grounding" },
   { phrase: "grounded", id: "grounding" },
+  { phrase: "harnesses", id: "harness" },
+  { phrase: "harness", id: "harness" },
+  { phrase: "corpora", id: "corpus" },
   { phrase: "corpus", id: "corpus" },
-];
+  { phrase: "vectors", id: "embedding" },
+  { phrase: "vector", id: "embedding" },
+  { phrase: "chunks", id: "chunk" },
+  { phrase: "chunk", id: "chunk" },
+  { phrase: "agents", id: "agent" },
+  { phrase: "agent", id: "agent" },
+  { phrase: "tokens", id: "token" },
+  { phrase: "token", id: "token" },
+  { phrase: "memory", id: "memory" },
+  // case-sensitive acronyms
+  { phrase: "APIs", id: "api", cs: true },
+  { phrase: "API", id: "api", cs: true },
+  { phrase: "LLMs", id: "llm", cs: true },
+  { phrase: "LLM", id: "llm", cs: true },
+  { phrase: "RAG", id: "rag", cs: true },
+  { phrase: "MCP", id: "mcp", cs: true },
+]
+  // longest first, so "tokenization" beats "token", "context window" beats none, etc.
+  .sort((a, b) => b.phrase.length - a.phrase.length);
 
 const isBoundary = (ch: string | undefined) =>
   ch === undefined || !/[a-z0-9]/i.test(ch);
 
-export function TermText({ children }: { children: string }) {
-  const text = children;
+// Wrap every non-overlapping, boundary-aligned occurrence in one left-to-right pass.
+function wrapString(text: string): React.ReactNode {
   const lower = text.toLowerCase();
-  const used = new Set<string>();
-  const chosen: { start: number; end: number; id: string }[] = [];
+  const out: React.ReactNode[] = [];
+  let buf = "";
+  let i = 0;
+  let n = 0;
 
-  for (const { phrase, id } of PHRASES) {
-    if (used.has(id)) continue;
-    const p = phrase.toLowerCase();
-    let from = 0;
-    for (;;) {
-      const idx = lower.indexOf(p, from);
-      if (idx === -1) break;
-      const end = idx + p.length;
-      if (isBoundary(text[idx - 1]) && isBoundary(text[end])) {
-        const overlaps = chosen.some((c) => idx < c.end && end > c.start);
-        if (!overlaps) {
-          chosen.push({ start: idx, end, id });
-          used.add(id);
-        }
+  while (i < text.length) {
+    let hit: { len: number; id: string } | null = null;
+    for (const { phrase, id, cs } of PHRASES) {
+      const len = phrase.length;
+      const matches = cs
+        ? text.slice(i, i + len) === phrase
+        : lower.slice(i, i + len) === phrase.toLowerCase();
+      if (matches && isBoundary(text[i - 1]) && isBoundary(text[i + len])) {
+        hit = { len, id };
         break;
       }
-      from = end;
+    }
+    if (hit) {
+      if (buf) {
+        out.push(buf);
+        buf = "";
+      }
+      out.push(
+        <Term id={hit.id} key={`t${i}-${n++}`}>
+          {text.slice(i, i + hit.len)}
+        </Term>,
+      );
+      i += hit.len;
+    } else {
+      buf += text[i];
+      i += 1;
     }
   }
+  if (buf) out.push(buf);
 
-  if (chosen.length === 0) return <>{text}</>;
-  chosen.sort((a, b) => a.start - b.start);
+  return out.length === 1 ? out[0] : out;
+}
 
-  const out: React.ReactNode[] = [];
-  let cursor = 0;
-  chosen.forEach((c, i) => {
-    if (c.start > cursor) out.push(text.slice(cursor, c.start));
-    out.push(
-      <Term id={c.id} key={`${c.id}-${i}`}>
-        {text.slice(c.start, c.end)}
-      </Term>,
-    );
-    cursor = c.end;
+// Recursively wrap text nodes in a React tree, leaving structure intact and
+// never descending into an existing <Term>, a link, or code.
+export function wrapChildren(children: React.ReactNode): React.ReactNode {
+  return React.Children.map(children, (child) => {
+    if (typeof child === "string") return wrapString(child);
+    if (!React.isValidElement(child)) return child;
+
+    const type = child.type;
+    if (type === Term || type === "a" || type === "code" || type === "pre") {
+      return child;
+    }
+    const props = child.props as { children?: React.ReactNode };
+    if (props && props.children != null) {
+      return React.cloneElement(child, {}, wrapChildren(props.children));
+    }
+    return child;
   });
-  if (cursor < text.length) out.push(text.slice(cursor));
+}
 
-  return <>{out}</>;
+export function TermText({ children }: { children: string }) {
+  return <>{wrapString(children)}</>;
 }
