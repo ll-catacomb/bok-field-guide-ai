@@ -92,9 +92,9 @@ export function Pyramid() {
         .pyr-tier + .pyr-tier { border-top: 1px solid var(--color-rule); }
         /* The apex band sits under the point; extra top padding drops the label
            down into the wider part of the triangle so it reads cleanly. */
-        .pyr-tier.is-apex { padding-top: 3.4rem; }
+        .pyr-tier.is-apex { padding-top: 4.8rem; }
         .pyr-tier.is-apex .pyr-name { font-size: 1.2rem; }
-        .pyr-tier.is-apex .pyr-short { max-width: 17rem; }
+        .pyr-tier.is-apex .pyr-short { max-width: 12rem; font-size: 11px; line-height: 1.35; }
         /* The base band needs to reach the bottom corners; a little more height
            keeps its proportions right against the wide foot of the triangle. */
         .pyr-tier:last-child { padding-bottom: 1.6rem; }

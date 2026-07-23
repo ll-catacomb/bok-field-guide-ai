@@ -63,7 +63,7 @@ export const TIERS: Tier[] = [
     key: "integration",
     level: 3,
     name: "AI integration",
-    short: "students learning to build with AI — not just use tools someone else made",
+    short: "students learning to build with AI, not just use tools someone else made",
     definition:
       "Bringing AI into the course as something students learn to wield, not only something they consume. It includes AI-built teaching materials — tutors, simulations, feedback — but the deeper move is students building with AI themselves: scaffolded sequences that end not in a paper but in a working system whose parts correspond to the intellectual moves of the discipline.",
     why: "This tier sits on top because it cannot compensate for a weak layer beneath it. Bolted onto a vague course — a chatbot and a shrug — it just accelerates the confusion. Done well, it asks more of students, not less. The point is not to hand them a tool someone else built; it is to have them build with AI themselves, and the techniques the field is most excited about map straight onto moves the curriculum already teaches. Context engineering — assembling and indexing every source a task needs in the model's working memory — is a more demanding version of the lit review. Multi-agent design — decomposing a task into sub-moves precise enough for an agent to act on — forces a student to state explicitly what it means to construct an argument, translate a text, or read closely. That articulation is most of the learning, and it lets you see, rather than guess, what a student thinks the moves of the discipline actually are. The skill shifts from authoring every sentence to setting direction, evaluating outputs, and standing behind the result.",
