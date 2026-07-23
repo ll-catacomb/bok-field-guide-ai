@@ -6,7 +6,7 @@ import { PROJECTS, TIER_LABEL } from "@/data/projects";
 export const metadata: Metadata = {
   title: "Gallery — AI for Higher Ed",
   description:
-    "Types of AI-in-teaching projects, tagged by the pyramid tier they serve.",
+    "Ideas for using AI in teaching, from the Bok Center — tagged by the pyramid tier they serve.",
 };
 
 export default function GalleryPage() {
@@ -19,12 +19,12 @@ export default function GalleryPage() {
         <h1 className="hero-title">The Gallery of Specimens</h1>
         <hr className="hero-rule" />
         <p className="hero-lede">
-          A catalog of project types, each accessioned by the{" "}
+          A growing list of ideas — from faculty, students, and Bok Center
+          fellows — for using AI in teaching, each accessioned by the{" "}
           <a href="/teaching" className="gal-herolink">
             pyramid
           </a>{" "}
-          tier it serves. A working collection — more specimens arrive as
-          faculty build them.
+          tier it serves.
         </p>
       </section>
 
@@ -32,10 +32,10 @@ export default function GalleryPage() {
         <div className="gal-grid">
           {PROJECTS.map((p, i) => (
             <article className="gal-card" key={p.key}>
-              <div className="placeholder-artifact gal-thumb">
-                PL00-{String(i + 1).padStart(3, "0")}/PH
-              </div>
-              <div className="gal-meta">
+              <div className="gal-cardhead">
+                <span className="gal-plate">
+                  PL00-{String(i + 1).padStart(3, "0")}
+                </span>
                 <div className="gal-tiers">
                   {p.tiers.map((t) => (
                     <span key={t} className={`gal-tier gal-tier-${t}`}>
@@ -44,20 +44,20 @@ export default function GalleryPage() {
                   ))}
                   <span className="gal-status tag">{p.status}</span>
                 </div>
-                <h2 className="gal-title font-display">{p.title}</h2>
-                <p className="gal-epithet">
-                  <TermText>{p.epithet}</TermText>
-                </p>
-                <p className="gal-blurb">
-                  <TermText>{p.blurb}</TermText>
-                </p>
               </div>
+              <h2 className="gal-title font-display">{p.title}</h2>
+              <p className="gal-epithet">
+                <TermText>{p.epithet}</TermText>
+              </p>
+              <p className="gal-blurb">
+                <TermText>{p.blurb}</TermText>
+              </p>
             </article>
           ))}
         </div>
 
         <p className="gal-seealso">
-          See also the Bok Center&rsquo;s live, discipline-spanning catalog:{" "}
+          These ideas are drawn verbatim from the Bok Center&rsquo;s{" "}
           <a
             href="https://bokcenter.harvard.edu/examples-and-ideas-for-using-AI-for-your-teaching"
             target="_blank"
@@ -69,19 +69,19 @@ export default function GalleryPage() {
       </section>
 
       <style>{`
-        .gal-wrap { max-width: 64rem; margin: 0 auto; padding: 1rem clamp(1rem, 4vw, 2.5rem) 0; }
-        .gal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: 2rem 1.75rem; }
-        .gal-card { display: flex; flex-direction: column; gap: 0.85rem; }
-        .gal-thumb { aspect-ratio: 4 / 3; }
-        .gal-meta { display: flex; flex-direction: column; gap: 0.4rem; }
-        .gal-tiers { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; }
+        .gal-wrap { max-width: 70rem; margin: 0 auto; padding: 1rem clamp(1rem, 4vw, 2.5rem) 0; }
+        .gal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(23rem, 1fr)); gap: 1.5rem; align-items: start; }
+        .gal-card { display: flex; flex-direction: column; gap: 0.45rem; border: 1px solid var(--color-rule); border-top: 3px solid var(--color-crimson); background: var(--color-paper); padding: 1.15rem 1.25rem 1.3rem; }
+        .gal-cardhead { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; margin-bottom: 0.15rem; }
+        .gal-plate { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.14em; color: var(--color-ash); }
+        .gal-tiers { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; margin-left: auto; }
         .gal-tier { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; padding: 1px 6px; border: 1px solid var(--color-crimson); color: var(--color-crimson); }
         .gal-tier-foundation { border-color: var(--color-gold); color: var(--color-gold); }
         .gal-tier-integration { background: var(--color-crimson); color: var(--color-paper); border-color: var(--color-crimson); }
-        .gal-status { margin-left: auto; font-size: 9.5px; }
-        .gal-title { font-size: 1.4rem; line-height: 1.05; font-weight: 400; margin: 0.2rem 0 0; }
+        .gal-status { font-size: 9.5px; }
+        .gal-title { font-size: 1.35rem; line-height: 1.08; font-weight: 400; margin: 0.15rem 0 0; }
         .gal-epithet { font-style: italic; font-size: 13px; color: var(--color-ash); margin: 0; }
-        .gal-blurb { font-size: 14px; color: var(--color-ink-soft); margin: 0.25rem 0 0; line-height: 1.45; }
+        .gal-blurb { font-size: 14px; color: var(--color-ink-soft); margin: 0.4rem 0 0; line-height: 1.5; }
         .gal-herolink { color: var(--color-crimson); }
         .gal-seealso { max-width: 42rem; margin: 2.5rem auto 0; font-size: 14px; color: var(--color-ink-soft); }
         .gal-seealso a { color: var(--color-crimson); font-family: var(--font-mono); font-size: 13px; text-decoration: none; border-bottom: 1px solid rgba(165,28,48,0.3); }
