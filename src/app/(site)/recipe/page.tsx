@@ -39,9 +39,9 @@ export default function RecipePage() {
           Every project we built in the workshops has the same three parts. The{" "}
           <Term id="context-window">context window</Term> itself is a recipe card:{" "}
           <strong>ingredients</strong> are
-          your inputs — the files, data, and examples you bring; <strong>steps</strong>{" "}
+          your inputs, the files, data, and examples you bring; <strong>steps</strong>{" "}
           are the operations and prompts, in order; and the <strong>dish</strong>{" "}
-          is your output — the page, the rubric, the dataset, the site. Another way
+          is your output: the page, the rubric, the dataset, the site. Another way
           to say it: you are writing a coursepack for a brilliant student who
           hasn&rsquo;t done the reading. Hand over the right materials and clear
           instructions, and the work comes back right.
@@ -50,7 +50,7 @@ export default function RecipePage() {
         <div className="recipe-card-hero">
           <div className="rc-slot">
             <span className="tag">ingredients</span>
-            <span className="rc-slot-sub">your inputs — files, data, examples</span>
+            <span className="rc-slot-sub">your inputs: files, data, examples</span>
           </div>
           <div className="rc-arrow" aria-hidden="true">→</div>
           <div className="rc-slot">
@@ -60,7 +60,7 @@ export default function RecipePage() {
           <div className="rc-arrow" aria-hidden="true">→</div>
           <div className="rc-slot rc-slot-dish">
             <span className="tag">dish</span>
-            <span className="rc-slot-sub">your output — the finished thing</span>
+            <span className="rc-slot-sub">your output: the finished thing</span>
           </div>
         </div>
 

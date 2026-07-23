@@ -317,7 +317,7 @@ const SIGNATURES = [
     tag: "hello world",
     glyph: "✳",
     title: "Hello, World — with recipes",
-    body: "We handed Claude a junk folder of recipe photos — handwriting, scans, terrible filenames — and it came back a clean, browsable website. A no-prerequisite on-ramp that ran on Day 1 of all three weeks: messy in, structured out.",
+    body: "We handed Claude a junk folder of recipe photos (handwriting, scans, terrible filenames) and it came back a clean, browsable website. A no-prerequisite on-ramp that ran on Day 1 of all three weeks: messy in, structured out.",
     foot: "the burst",
   },
   {
@@ -388,7 +388,7 @@ function Signatures() {
           }}
         >
           The field guide you just read explains the engine. In the room we
-          organized four days around a single, friendly idea — a recipe — and let
+          organized four days around a single, friendly idea, a recipe, and let
           it carry faculty from their first delight to real fluency. Three moves
           did most of the work.
         </motion.p>
@@ -508,7 +508,7 @@ const STORY = [
   {
     eyebrow: "Beat 01 · Hello, World",
     title: "Messy in, structured out",
-    body: "A folder of photographed recipes — handwritten cards, magazine scans, junk filenames — handed to Claude with nothing else. It recognized the dishes, renamed the files, transcribed each recipe, and built a small browsable website. You could feel the delight in the room when the files came back clean.",
+    body: "A folder of photographed recipes (handwritten cards, magazine scans, junk filenames) handed to Claude with nothing else. It recognized the dishes, renamed the files, transcribed each recipe, and built a small browsable website. You could feel the delight in the room when the files came back clean.",
     image: {
       src: null,
       label: "the recipe website: messy photos → clean card-grid site (/public/claude/recipe-website.jpg)",
@@ -519,7 +519,7 @@ const STORY = [
   {
     eyebrow: "Beat 02 · The connective move",
     title: "Faculty's own recipes, prototyped overnight",
-    body: "At a day's close, faculty filled out paper 'recipe cards' — Ingredients, Instructions, Serving — each a real teaching problem. It's the same card the field guide hands you on the recipe page. Overnight we scaffolded every one into a working starter project; faculty walked in the next morning and found their own half-formed idea already running in a folder.",
+    body: "At a day's close, faculty filled out paper 'recipe cards' (Ingredients, Instructions, Serving), each a real teaching problem. It's the same card the field guide hands you on the recipe page. Overnight we scaffolded every one into a working starter project; faculty walked in the next morning and found their own half-formed idea already running in a folder.",
     image: {
       src: null,
       label: "handwritten recipe cards + the overnight prototype they became (/public/claude/recipe-cards.jpg)",
@@ -530,7 +530,7 @@ const STORY = [
   {
     eyebrow: "Beat 03 · Context engineering",
     title: "One line changes everything",
-    body: "The field guide shows how everything lands in one context window. Here faculty saw it bite: Claude was ending every answer with a limerick — a single line buried in a CLAUDE.md file. Edited live, the behavior flipped instantly. One sentence in one markdown file steered a whole folder. That is context engineering, taught as a moment of delight — and nearly everyone wrote and ran their own.",
+    body: "The field guide shows how everything lands in one context window. Here faculty saw it bite: Claude was ending every answer with a limerick, a single line buried in a CLAUDE.md file. Edited live, the behavior flipped instantly. One sentence in one markdown file steered a whole folder. That is context engineering, taught as a moment of delight — and nearly everyone wrote and ran their own.",
     image: {
       src: null,
       label: "the CLAUDE.md 'limerick' line / a faculty member's own context file (/public/claude/claude-md.jpg)",
@@ -552,7 +552,7 @@ const STORY = [
   {
     eyebrow: "Beat 05 · Under the hood",
     title: "The levers underneath the recipe",
-    body: "By the last day, faculty wanted to know what did the steering. Underneath sits the harness — the same program the field guide introduces when it turns from the engine to the tools — and a small set of primitives you configure to shape it. Skills, hooks, MCPs, slash commands, subagents: five levers, each a different way to decide what Claude does and when. They are the substance of days three and four, and the reason a recipe can harden into a repeatable tool.",
+    body: "By the last day, faculty wanted to know what did the steering. Underneath sits the harness (the same program the field guide introduces when it turns from the engine to the tools) and a small set of primitives you configure to shape it. Skills, hooks, MCPs, slash commands, subagents: five levers, each a different way to decide what Claude does and when. They are the substance of days three and four, and the reason a recipe can harden into a repeatable tool.",
     spec: { glyph: "✦", rows: PRIMITIVE_ROWS },
   },
 ];
@@ -838,8 +838,8 @@ function Closing() {
           }}
         >
           Build it with the people in the room, capture what emerges, iterate the
-          next day. Faculty using AI on their own work — research, writing,
-          administration — is the precondition for designing good AI-aware work
+          next day. Faculty using AI on their own work (research, writing,
+          administration) is the precondition for designing good AI-aware work
           for students. The field guide is the primer; the recipe card is where
           your own first project begins.
         </motion.p>

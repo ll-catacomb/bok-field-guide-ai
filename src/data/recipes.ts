@@ -21,7 +21,7 @@ export const RECIPES: Recipe[] = [
     title: "An Out-of-Print Anthology, Digitized",
     field: "Japanese · translation",
     ingredients: [
-      "Photocopies of an out-of-print poetry collection — scans or even phone photos of the pages",
+      "Photocopies of an out-of-print poetry collection (scans or even phone photos of the pages)",
       "A note on the romanization and translation style you want",
     ],
     steps: [
@@ -38,7 +38,7 @@ export const RECIPES: Recipe[] = [
     field: "physics · interactive",
     ingredients: [
       "A one-page brief: the states and gates you want a student to see",
-      "The exact computations, hardcoded — no live math engine, just the numbers you trust",
+      "The exact computations, hardcoded (no live math engine, just the numbers you trust)",
     ],
     steps: [
       "Design a Bloch-sphere / state-vector visualization for the concept",
@@ -78,7 +78,7 @@ export const RECIPES: Recipe[] = [
       "Aggregate the batches and write the lineage out in prose, ordered by year",
     ],
     dish: "Per-batch JSON, a master file, and a prose history of who was echoing whom.",
-    why: "The question you've carried since grad school — who cites whom — answerable at last across the whole corpus.",
+    why: "The question you've carried since grad school (who cites whom), answerable at last across the whole corpus.",
   },
   {
     key: "research-stack",
@@ -117,7 +117,7 @@ export const RECIPES: Recipe[] = [
     title: "A Dataset from Years of Field Notebooks",
     field: "biology · fieldwork",
     ingredients: [
-      "Photographs or scans of your field notebooks — handwritten observations, dates, sites",
+      "Photographs or scans of your field notebooks (handwritten observations, dates, sites)",
       "A note on the columns you want: species, count, location, date, conditions",
     ],
     steps: [

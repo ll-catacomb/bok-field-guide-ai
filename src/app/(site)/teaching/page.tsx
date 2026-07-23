@@ -51,17 +51,17 @@ export default function TeachingPage() {
           as a paper is: each stage develops an AI-native skill (context
           engineering, prompt design, multi-agent orchestration) alongside a
           traditional one (close reading, argument, translation), and each
-          intermediate artifact — the source index, the prompt set, the agent
-          specification — is itself assessable, the way an outline and a draft used
+          intermediate artifact (the source index, the prompt set, the agent
+          specification) is itself assessable, the way an outline and a draft used
           to be.
         </p>
         <p>
           Two of these techniques map directly onto moves the curriculum already
-          teaches. <strong>Context engineering</strong> — assembling and indexing
-          every source a task needs in the model&rsquo;s working memory — is a more
+          teaches. <strong>Context engineering</strong> (assembling and indexing
+          every source a task needs in the model&rsquo;s working memory) is a more
           demanding version of the lit review. <strong>Multi-agent design</strong>{" "}
-          — decomposing a task into sub-moves precise enough for an agent to act on
-          — forces a student to state explicitly what it means to construct an
+          (decomposing a task into sub-moves precise enough for an agent to act on)
+          forces a student to state explicitly what it means to construct an
           argument or translate a text. That articulation is most of the learning,
           and it lets you see, rather than guess, what a student thinks the moves of
           the discipline actually are. In Comparative Literature, students who have
@@ -74,12 +74,12 @@ export default function TeachingPage() {
         <p>
           The skill this develops is less writing every sentence than setting
           direction, evaluating outputs, and standing behind the result. Students
-          learn to read AI&rsquo;s work with a trained eye — for fabricated
+          learn to read AI&rsquo;s work with a trained eye (for fabricated
           citations, plausible-but-unsupported claims, fluent prose over uncertain
-          ground — and to show not that AI is untrustworthy but <em>why this output
+          ground) and to show not that AI is untrustworthy but <em>why this output
           is wrong, and where</em>. Assessment follows the shift: students submit
-          finished work with a record of process — what the AI produced, what they
-          verified, what they changed and why — and defend it in conversation. None
+          finished work with a record of process (what the AI produced, what they
+          verified, what they changed and why) and defend it in conversation. None
           of this lowers the rigor of the work. It demands more of it.
         </p>
 
@@ -96,13 +96,13 @@ export default function TeachingPage() {
         </p>
         <p>
           Some of that embodied work can loop back into the AI story, if you want
-          it to. A student who spends an afternoon in a museum — gathering notes,
-          photographs, and observations — can turn that first-hand encounter into
+          it to. A student who spends an afternoon in a museum (gathering notes,
+          photographs, and observations) can turn that first-hand encounter into
           a structured database and then build an argument on top of it: the same{" "}
           ingredients → steps → dish move from the <a href="/recipe">recipe card</a>.
           But the tie-in is entirely optional. We are just as happy to help you
-          design plain AI-resilient work with no AI integration at all — a seated
-          exam, an oral defense, a studio critique — and to talk through the
+          design plain AI-resilient work with no AI integration at all (a seated
+          exam, an oral defense, a studio critique) and to talk through the
           logistics and the question-writing that make it hold up.
         </p>
 

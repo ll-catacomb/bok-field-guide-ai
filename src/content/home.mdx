@@ -20,7 +20,7 @@
 
 <div className="reading prose">
 
-<p className="drop-cap">Every week a new AI tool appears: chat windows, writing assistants, research companions, autonomous agents. They look nothing alike. But they are all built on the same engine. Once you understand that engine, you can make sense of any tool, current or future, because you know what it is actually doing underneath.</p>
+<p className="drop-cap">Every week a new AI tool appears: chat windows, writing assistants, research companions, autonomous agents. They look nothing alike. But they are all built on the same engine — and once you understand it, you can make sense of any tool, current or future, because you know what it is actually doing underneath.</p>
 
 This guide is for teachers, and assumes no code. It starts at the center (the exchange every one of these tools wraps around) and works outward to the specific tools Harvard provides, so that when a colleague mentions "the CLI" or "a custom GPT," you can place it on a map.
 
@@ -76,7 +76,7 @@ It isn't only math. Ask a model to close-read a real scene, once cold, once with
 
 <Grounding />
 
-The model has two hard limits: it can't reliably compute or recall the actual world, and it can only hold so much in view at once. Nearly every tool you'll meet exists to manage those two limits: feeding it the right inputs, and carrying its outputs.
+The model has two hard limits: it can't reliably compute or recall the actual world, and it can only hold so much in view at once. Nearly every tool you'll meet exists to manage those two limits — feeding it the right inputs, and carrying its outputs.
 
 ## Everything lands in the context window
 
@@ -88,7 +88,7 @@ The budget doesn't reset between messages. It fills as the conversation grows. W
 
 <ContextFill />
 
-When the window fills, most tools <Term id="compaction"><strong>compact</strong></Term> rather than stop: they summarize the older turns and pass the summary forward, so the chat feels seamless. The catch is that the model is now reasoning from a compressed, lossy recap. That is the reason a very long thread quietly loses the thread.
+When the window fills, most tools <Term id="compaction"><strong>compact</strong></Term> rather than stop: they summarize the older turns and pass the summary forward, so the chat feels seamless. The catch is that the model is now reasoning from a compressed, lossy recap — the reason a very long thread quietly loses the thread.
 
 ## Memory: the first automatic context
 
@@ -129,7 +129,7 @@ Notice that the *engine* never changed. A string goes into a model and a string 
 
 ## Tool calls: giving the model hands and eyes
 
-Now that we understand how harnesses automatically handle your inputs and outputs, we can name the mechanism they use to do it: the <Term id="tool-call"><strong>tool call</strong></Term>. A tool is any function the model is allowed to invoke, and in every case the model supplies the *judgment* (it recognizes it needs a tool and writes the call) while the tool supplies the *precision*.
+Now that we understand how harnesses automatically handle your inputs and outputs, we can name the mechanism they use to do it: the <Term id="tool-call"><strong>tool call</strong></Term>. A tool is any function the model is allowed to invoke, and in every case the model supplies the *judgment* — it recognizes it needs a tool and writes the call — while the tool supplies the *precision*.
 
 You've already seen one. The Python run in the multiplication demo was a tool call: the model couldn't compute the product, so it wrote code (the code is its *output*) and a code executor ran that code and handed the real answer back. The calculation happened in Python, not in the model.
 
@@ -141,7 +141,7 @@ Most tools are code or API based, and they give the model abilities it genuinely
 
 ### Unpacking a tool call: RAG on a PDF
 
-The eyes-side tools are worth slowing down on, because the most important one (retrieval) is both powerful and quietly failure-prone. Start with the reason it exists: the context window is finite. A small document you can simply paste in whole, and the model sees every word. But scale up, and the window fills. A whole book, let alone a library, won't come close to fitting:
+The eyes-side tools are worth slowing down on, because the most important one — retrieval — is both powerful and quietly failure-prone. Start with the reason it exists: the context window is finite. A small document you can simply paste in whole, and the model sees every word. But scale up, and the window fills. A whole book, let alone a library, won't come close to fitting:
 
 <RetrievalTradeoff />
 
@@ -159,7 +159,7 @@ This whole pipeline (window, chunks, vectors, retrieval) is exactly what **Noteb
 
 ### Reaching out: APIs, keys, and MCP
 
-The eyes and hands so far have mostly stayed inside the chat. But the most powerful tools reach *out*, to a live service: a Google Doc, a course database, your calendar. The mechanism is an <Term id="api"><strong>API</strong></Term> (application programming interface): a service publishes a set of requests it will answer, and the harness sends one, proving it's allowed with a <Term id="api-key"><strong>secret key</strong></Term>, a password for machines. The service checks the key and sends the data back.
+The eyes and hands so far have mostly stayed inside the chat. But the most powerful tools reach *out*, to a live service — a Google Doc, a course database, your calendar. The mechanism is an <Term id="api"><strong>API</strong></Term> (application programming interface): a service publishes a set of requests it will answer, and the harness sends one, proving it's allowed with a <Term id="api-key"><strong>secret key</strong></Term>, a password for machines. The service checks the key and sends the data back.
 
 <ApiHandshake />
 
