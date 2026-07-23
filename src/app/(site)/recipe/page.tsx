@@ -14,15 +14,22 @@ export default function RecipePage() {
       <CatalogStripe slug="/recipe" id="RC04" />
 
       <section className="hero">
-        <span className="plate-label">Field Guide · Bok Center · Plate IV</span>
-        <h1 className="hero-title">The Recipe Card</h1>
-        <hr className="hero-rule" />
-        <p className="hero-lede">
-          You now know what the engine is, what it can and can&rsquo;t do, and how
-          harnesses and tools extend it. So — your first project. The Learning Lab
-          teaches it as a recipe: get the recipe right and the dish comes out
-          right; leave an ingredient out and it won&rsquo;t.
-        </p>
+        <div className="hero-text">
+          <span className="plate-label">Field Guide · Bok Center · Plate IV</span>
+          <h1 className="hero-title">The Recipe Card</h1>
+          <hr className="hero-rule" />
+          <p className="hero-lede">
+            You now know what the engine is, what it can and can&rsquo;t do, and how
+            harnesses and tools extend it. So — your first project. The Learning Lab
+            teaches it as a recipe: get the recipe right and the dish comes out
+            right; leave an ingredient out and it won&rsquo;t.
+          </p>
+        </div>
+        <img
+          className="hero-figure"
+          src="/cook.png"
+          alt="Woodcut-style illustration of a hand emerging from clouds, holding a serpent over rising flames, printed in red."
+        />
       </section>
 
       <article className="reading prose">

@@ -14,6 +14,7 @@ import { RagPipeline } from "@/components/interactive/RagPipeline";
 import { ApiHandshake } from "@/components/interactive/ApiHandshake";
 import { ApiTools } from "@/components/interactive/ApiTools";
 import { HarvardAtlas } from "@/components/HarvardAtlas";
+import { Term } from "@/components/Term";
 
 // Registered globally so .mdx files can use these as bare tags (no import).
 export function useMDXComponents(components: MDXComponents): MDXComponents {
@@ -34,5 +35,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ApiHandshake,
     ApiTools,
     HarvardAtlas,
+    Term,
   };
 }

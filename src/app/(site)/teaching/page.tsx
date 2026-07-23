@@ -29,32 +29,15 @@ export default function TeachingPage() {
         <p className="drop-cap">
           It is tempting to start with the exciting part — the custom tutor, the
           AI feedback engine, the simulation. But integration is the top of a
-          pyramid, and a pyramid is only as sound as what holds it up. Each tier
-          below rests on the one beneath it. Click through them from the base.
+          pyramid, and a pyramid is only as sound as what holds it up. Read it the
+          way you would read Maslow&rsquo;s hierarchy of needs: each tier&rsquo;s
+          needs must be met before the one above it even comes into reach. A
+          course can&rsquo;t be made AI-resilient until its goals are clear, and AI
+          can&rsquo;t be integrated well into a course that isn&rsquo;t resilient.
+          Click through the tiers from the base.
         </p>
 
         <Pyramid />
-
-        <h2>Reading the pyramid</h2>
-        <p>
-          The order is the argument. <strong>Course structure</strong> is
-          ordinary good teaching — clear objectives, legible materials,
-          transparent criteria. It has nothing to do with AI, and everything to
-          do with whether your AI choices will make sense.
-        </p>
-        <p>
-          <strong>AI-resilience</strong> comes next: designing work whose value
-          doesn&rsquo;t collapse the moment a model can produce a passable
-          version of it. This is a design problem, not a policing problem — and
-          it&rsquo;s far easier when the tier below is solid, because you already
-          know what each assignment is <em>for</em>.
-        </p>
-        <p>
-          Only at the apex does <strong>AI integration</strong> belong — bringing
-          AI in deliberately to do things you couldn&rsquo;t do before. Built on
-          the lower two, it can be transformative. Built on sand, it simply
-          accelerates the confusion.
-        </p>
 
         <h2>A note on seated exams</h2>
         <p>

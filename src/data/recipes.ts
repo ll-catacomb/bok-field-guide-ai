@@ -18,7 +18,7 @@ export type Recipe = {
 export const RECIPES: Recipe[] = [
   {
     key: "japanese-poetry",
-    title: "The Lost Anthology",
+    title: "An Out-of-Print Anthology, Digitized",
     field: "Japanese · translation",
     ingredients: [
       "Photocopies of an out-of-print poetry collection — scans or even phone photos of the pages",
@@ -34,7 +34,7 @@ export const RECIPES: Recipe[] = [
   },
   {
     key: "qubit-visualizer",
-    title: "The Qubit You Could Never Draw",
+    title: "A Bloch-Sphere Qubit Visualizer",
     field: "physics · interactive",
     ingredients: [
       "A one-page brief: the states and gates you want a student to see",
@@ -50,7 +50,7 @@ export const RECIPES: Recipe[] = [
   },
   {
     key: "fourteen-odysseys",
-    title: "Fourteen Odysseys",
+    title: "The Odyssey in Fourteen Translations",
     field: "languages · philology",
     ingredients: [
       "The translations you've collected over the years (here, the Odyssey in fourteen English versions) plus the Greek",
@@ -66,7 +66,7 @@ export const RECIPES: Recipe[] = [
   },
   {
     key: "song-lineage",
-    title: "Who the Songs Were Listening To",
+    title: "Influence Across a Song-Lyric Corpus",
     field: "music · corpora",
     ingredients: [
       "A corpus you care about as JSON (here, 538 song lyrics)",
@@ -82,7 +82,7 @@ export const RECIPES: Recipe[] = [
   },
   {
     key: "research-stack",
-    title: "The Stack You Never Read Together",
+    title: "The Papers on Your Desk, Synthesized",
     field: "research · synthesis",
     ingredients: [
       "The papers piling up on your desk (PDFs)",
@@ -98,7 +98,7 @@ export const RECIPES: Recipe[] = [
   },
   {
     key: "unfinished-interviews",
-    title: "The Interviews You Never Finished Coding",
+    title: "Interview Transcripts, Fully Coded",
     field: "social science",
     ingredients: [
       "The transcripts and codebook (CSV) you started and set aside",
@@ -113,8 +113,24 @@ export const RECIPES: Recipe[] = [
     why: "The dataset you couldn't face finishing by hand — now moving again, with you still holding the interpretation.",
   },
   {
+    key: "field-notebooks",
+    title: "A Dataset from Years of Field Notebooks",
+    field: "biology · fieldwork",
+    ingredients: [
+      "Photographs or scans of your field notebooks — handwritten observations, dates, sites",
+      "A note on the columns you want: species, count, location, date, conditions",
+    ],
+    steps: [
+      "Read each notebook page; transcribe every entry, handwriting intact",
+      "Structure each observation into your chosen fields, with dates normalized",
+      "Flag illegible or ambiguous entries for your own review rather than guessing",
+    ],
+    dish: "A clean, analyzable dataset (CSV) of every observation — decades of fieldwork finally in one queryable table.",
+    why: "The notebooks have filled a shelf since your first season. This is the project that turns them into data you can actually ask questions of.",
+  },
+  {
     key: "paper-teachable",
-    title: "Your Paper, Finally Teachable",
+    title: "A Teaching Packet from Your Own Paper",
     field: "any discipline",
     ingredients: ["One published paper you wish your students actually read (ideally your own)"],
     steps: [

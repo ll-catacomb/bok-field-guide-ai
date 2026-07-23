@@ -26,9 +26,9 @@ This guide is for teachers, and assumes no code. It starts at the center — the
 
 ## First, what do we mean by "AI"?
 
-*Machine learning* — systems that improve at a task by finding patterns in data — has run spam filters and recommendations for years. What's new is **generative** models: systems that produce new text, images, audio, or video.
+<Term id="machine-learning"><em>Machine learning</em></Term> — systems that improve at a task by finding patterns in data — has run spam filters and recommendations for years. What's new is <Term id="generative"><strong>generative</strong></Term> models: systems that produce new text, images, audio, or video.
 
-Even here there is more than one kind of machine. The same companies build **diffusion models** for images (DALL·E, Imagen); we set those aside. Our subject is the **large language model**, or LLM: the text-in, text-out engine behind Claude, ChatGPT, and Gemini. It is what nearly every AI tool reaching your classroom is made of.
+Even here there is more than one kind of machine. The same companies build <Term id="diffusion"><strong>diffusion models</strong></Term> for images (DALL·E, Imagen); we set those aside. Our subject is the <Term id="llm"><strong>large language model</strong>, or LLM</Term>: the text-in, text-out engine behind Claude, ChatGPT, and Gemini. It is what nearly every AI tool reaching your classroom is made of.
 
 We won't cover how an LLM is built or trained — that story is told well elsewhere by Andrej Karpathy, [*Deep Dive into LLMs like ChatGPT*](https://www.youtube.com/watch?v=7xTGNNLPyMI). 
 
@@ -48,7 +48,7 @@ Every tool in this guide packages operations around this one exchange. Text in, 
 
 ## It's all tokens
 
-Flip that demo to "what the model sees" and the words become numbers — literally. The model never sees letters. Text enters as a sequence of integers called **tokens**: fragments of text, each mapped to a number. It predicts the next *token*, not the next word.
+Flip that demo to "what the model sees" and the words become numbers — literally. The model never sees letters. Text enters as a sequence of integers called <Term id="token"><strong>tokens</strong></Term>: fragments of text, each mapped to a number. It predicts the next *token*, not the next word.
 
 <Tokenizer />
 
@@ -62,7 +62,7 @@ The New York Times built a tiny version you can watch learn. Their [*BabyGPT*](h
 
 <TrainingProgression />
 
-A small model emits gibberish; trained longer, it finds words, then grammar, then a recognizable voice. Now scale that up — billions of parameters, trained on a large fraction of everything ever written — and "the likely next token" reads as fluent thought. That is roughly where today's frontier models sit. As the *Times* piece shows, nothing here is copied or looked up; the structure of language is *reconstructed*, one prediction at a time.
+A small model emits gibberish; trained longer, it finds words, then grammar, then a recognizable voice. Now scale that up — billions of <Term id="parameters">parameters</Term>, trained on a large fraction of everything ever written — and "the likely next token" reads as fluent thought. That is roughly where today's frontier models sit. As the *Times* piece shows, nothing here is copied or looked up; the structure of language is *reconstructed*, one prediction at a time.
 
 ## So it must be good at math?
 
@@ -80,7 +80,7 @@ Two failures, one shape. The model has two hard limits: it can't reliably comput
 
 ## Everything lands in the context window
 
-Take the second limit — what it can hold. Think of the input as a course pack for a brilliant student who hasn't done the reading: give it the passage, the rubric, an example of the move you want, and it follows your lead. But your prompt, its reply, your next message, and its next all accumulate in one fixed-size **context window**. Spend that budget on high-signal context and it guesses less; overspend and quality drops — the model gets lost in the middle.
+Take the second limit — what it can hold. Think of the input as a course pack for a brilliant student who hasn't done the reading: give it the passage, the rubric, an example of the move you want, and it follows your lead. But your prompt, its reply, your next message, and its next all accumulate in one fixed-size <Term id="context-window"><strong>context window</strong></Term>. Spend that budget on high-signal context and it guesses less; overspend and quality drops — the model gets lost in the middle.
 
 <ContextWindow />
 
@@ -88,11 +88,11 @@ And the budget doesn't reset between messages — it fills as the conversation g
 
 <ContextFill />
 
-When the window fills, most tools **compact** rather than stop: they summarize the older turns and pass the summary forward, so the chat feels seamless. The catch is that the model is now reasoning from a compressed, lossy recap — the reason a very long thread quietly loses the thread.
+When the window fills, most tools <Term id="compaction"><strong>compact</strong></Term> rather than stop: they summarize the older turns and pass the summary forward, so the chat feels seamless. The catch is that the model is now reasoning from a compressed, lossy recap — the reason a very long thread quietly loses the thread.
 
 ## Memory: the first automatic context
 
-If every new chat opens a blank window, how does a tool ever seem to remember you? By keeping a **memory** — a small note it writes and quietly loads into each new thread. It's the simplest form of *automatic context*: context you never pasted, added for you.
+If every new chat opens a blank window, how does a tool ever seem to remember you? By keeping a <Term id="memory"><strong>memory</strong></Term> — a small note it writes and quietly loads into each new thread. It's the simplest form of *automatic context*: context you never pasted, added for you.
 
 <Memory />
 
@@ -111,7 +111,7 @@ Context solves the input side. But what about the output?
 
 In the earliest way of working, you'd get text back from the chat window, read it, copy it, paste it into a file or a document, and take it somewhere else to see if it worked. If it didn't, you'd go back to the chat, describe what went wrong, and iterate. The string came out of the model, and then *you* had to carry it the rest of the way.
 
-Each tier is a different **harness** — the software wrapping the engine that manages your context and does the carrying for you, thin in a chat box and thick in a coding agent. The evolution of these tools is largely the story of automating that carry. As you read the tiers below, ask one question: *do I want to see what's happening, or have it handled for me?* The right answer changes with the stakes.
+Each tier is a different <Term id="harness"><strong>harness</strong></Term> — the software wrapping the engine that manages your context and does the carrying for you, thin in a chat box and thick in a coding agent. The evolution of these tools is largely the story of automating that carry. As you read the tiers below, ask one question: *do I want to see what's happening, or have it handled for me?* The right answer changes with the stakes.
 
 **Chat interfaces** are the exchange at its most literal. You put in a prompt in natural language and read a reply; then you copy what's useful somewhere else to make use of it. String-in, string-out at its most direct. *(Claude.ai, ChatGPT, Gemini in the browser.)*
 
@@ -123,13 +123,13 @@ Each tier is a different **harness** — the software wrapping the engine that m
 
 **All-in-one platforms** like Lovable, Replit, and Bolt approach it from the other direction. Instead of giving developers more control, they give non-developers less friction. These tools handle not just the generation but the deployment, the setup, the provisioning. You describe what you want and the platform handles the entire pipeline — input to output to a running application. You don't need to know what a build system is.
 
-**Autonomous agents** are the final step, so far. Agent modes in Cursor and Claude Code — and standalone agents — don't wait for your prompts. You give them access to your files, your tools, and your keys — the proverbial keys to the car — and a persistent memory, and they drive. You don't control the string in or the string out; you rarely even see the intermediate steps. You just see the final product. This is powerful, and it is genuinely dangerous: an agent can rack up costs, introduce errors, and make irreversible changes without asking.
+<Term id="agent"><strong>Autonomous agents</strong></Term> are the final step, so far. Agent modes in Cursor and Claude Code — and standalone agents — don't wait for your prompts. You give them access to your files, your tools, and your keys — the proverbial keys to the car — and a persistent memory, and they drive. You don't control the string in or the string out; you rarely even see the intermediate steps. You just see the final product. This is powerful, and it is genuinely dangerous: an agent can rack up costs, introduce errors, and make irreversible changes without asking.
 
 Notice that the *engine* never changed. A string goes into a model and a string comes out, at every tier. What changes is how thick the harness is — how many layers sit between you and that exchange, and whether, for the task at hand, they help or hide.
 
 ## Tool calls: giving the model hands and eyes
 
-Now that we understand how harnesses automatically handle your inputs and outputs, we can name the mechanism they use to do it: the **tool call**. A tool is any function the model is allowed to invoke, and in every case the model supplies the *judgment* — it recognizes it needs a tool and writes the call — while the tool supplies the *precision*.
+Now that we understand how harnesses automatically handle your inputs and outputs, we can name the mechanism they use to do it: the <Term id="tool-call"><strong>tool call</strong></Term>. A tool is any function the model is allowed to invoke, and in every case the model supplies the *judgment* — it recognizes it needs a tool and writes the call — while the tool supplies the *precision*.
 
 You've already seen one. The Python run in the multiplication demo was a tool call: the model couldn't compute the product, so it wrote code — the code is its *output* — and a code executor ran that code and handed the real answer back. The calculation happened in Python, not in the model.
 
@@ -145,13 +145,13 @@ The eyes-side tools are worth slowing down on, because the most important one �
 
 <RetrievalTradeoff />
 
-That overflow is what **RAG** (retrieval-augmented generation) is built for. Instead of loading everything, it loads only the passages most relevant to your question:
+That overflow is what <Term id="rag"><strong>RAG</strong></Term> (retrieval-augmented generation) is built for. Instead of loading everything, it loads only the passages most relevant to your question:
 
 <RagPipeline />
 
 #### What makes a chunk "relevant"?
 
-Everything hinges on that word "relevant," and it has a precise, mechanical meaning. Every chunk — and your question — is turned into a **vector**: a list of numbers that fixes it at a point in space, so that words and passages used in similar ways land near each other. *King* and *queen* sit almost on top of one another; *graphene* is off in a distant region entirely. "Relevant" just means *near*. (The technique that first made this work at scale was **word2vec** — you can explore real, high-dimensional embeddings in [the TensorFlow Embedding Projector](https://projector.tensorflow.org/).)
+Everything hinges on that word "relevant," and it has a precise, mechanical meaning. Every <Term id="chunk">chunk</Term> — and your question — is turned into a <Term id="embedding"><strong>vector</strong></Term>: a list of numbers that fixes it at a point in space, so that words and passages used in similar ways land near each other. *King* and *queen* sit almost on top of one another; *graphene* is off in a distant region entirely. "Relevant" just means *near*. (The technique that first made this work at scale was **word2vec** — you can explore real, high-dimensional embeddings in [the TensorFlow Embedding Projector](https://projector.tensorflow.org/).)
 
 But that arrangement is a *particular* way of organizing language, not always the *right* one. Where the exact word is the argument — law, medicine, close textual scholarship — near-synonyms like *murder* and *manslaughter* sit side by side in vector space yet are anything but interchangeable. This is the deep reason RAG can fail careful academic work: it retrieves what is *similar*, not necessarily what is *right*.
 
@@ -159,7 +159,7 @@ This whole pipeline — window, chunks, vectors, retrieval — is exactly what *
 
 ### Reaching out: APIs, keys, and MCP
 
-The eyes and hands so far have mostly stayed inside the chat. But the most powerful tools reach *out*, to a live service — a Google Doc, a course database, your calendar. The mechanism is an **API** (application programming interface): a service publishes a set of requests it will answer, and the harness sends one, proving it's allowed with a **secret key** — a password for machines. The service checks the key and sends the data back.
+The eyes and hands so far have mostly stayed inside the chat. But the most powerful tools reach *out*, to a live service — a Google Doc, a course database, your calendar. The mechanism is an <Term id="api"><strong>API</strong></Term> (application programming interface): a service publishes a set of requests it will answer, and the harness sends one, proving it's allowed with a <Term id="api-key"><strong>secret key</strong></Term> — a password for machines. The service checks the key and sends the data back.
 
 <ApiHandshake />
 
@@ -167,7 +167,7 @@ That works beautifully for one service. The trouble is that every service is dif
 
 <ApiTools />
 
-This is the problem **MCP** — the **Model Context Protocol** — was built to solve. It's an open standard, best thought of as a universal port (a USB-C for tools). Instead of teaching the harness every service's private API, you run a small **MCP server** for each service; the server holds that service's key and translates the one standard protocol into the service's own calls. The harness only ever needs to speak MCP. Adding a new capability — your library catalog, a lab instrument, a university system — becomes "plug in another server," not "rewrite the app." It's how "the model can use this" becomes something you, not just the vendor, can extend.
+This is the problem <Term id="mcp"><strong>MCP</strong></Term> — the **Model Context Protocol** — was built to solve. It's an open standard, best thought of as a universal port (a USB-C for tools). Instead of teaching the harness every service's private API, you run a small **MCP server** for each service; the server holds that service's key and translates the one standard protocol into the service's own calls. The harness only ever needs to speak MCP. Adding a new capability — your library catalog, a lab instrument, a university system — becomes "plug in another server," not "rewrite the app." It's how "the model can use this" becomes something you, not just the vendor, can extend.
 
 ## The map: what Harvard puts on your desk
 

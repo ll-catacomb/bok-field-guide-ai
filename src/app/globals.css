@@ -488,6 +488,11 @@ body {
   padding: clamp(3.5rem, 9vw, 7rem) 1.5rem clamp(2rem, 5vw, 3.5rem);
   max-width: 60rem;
   margin: 0 auto;
+}
+
+/* The two-column row (text + illustration) applies only to heroes that carry a
+   figure, e.g. the home page's dragon. Heroes without one stay a normal stack. */
+.hero:has(.hero-figure) {
   display: flex;
   align-items: center;
   gap: clamp(1.5rem, 4vw, 3rem);
@@ -506,7 +511,7 @@ body {
 }
 
 @media (max-width: 640px) {
-  .hero {
+  .hero:has(.hero-figure) {
     flex-direction: column-reverse;
     align-items: flex-start;
   }
@@ -618,5 +623,95 @@ body {
   *::after {
     transition: none !important;
     animation: none !important;
+  }
+}
+
+/* — glossary hover-card (jargon definitions on hover/focus) — */
+
+.term-trigger {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  cursor: help;
+  border-bottom: 1px dotted var(--color-crimson);
+  line-height: inherit;
+}
+
+.term-trigger:hover,
+.term-trigger:focus-visible {
+  border-bottom-style: solid;
+  outline: none;
+}
+
+/* Rendered in a portal on <body>, so it sits above the site grain (z 60). */
+.term-card {
+  z-index: 9999;
+  max-width: min(92vw, 22rem);
+  background: var(--color-paper);
+  border: 1px solid var(--color-rule);
+  box-shadow:
+    0 2px 4px rgba(26, 24, 23, 0.06),
+    0 12px 32px rgba(26, 24, 23, 0.14);
+  padding: 0.95rem 1.05rem 0.9rem;
+  font-family: var(--font-body);
+  animation: term-in 140ms ease-out;
+}
+
+.term-card-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-crimson);
+  margin-bottom: 0.4rem;
+}
+
+.term-card-def {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--color-ink);
+}
+
+.term-card-links {
+  list-style: none;
+  margin: 0.7rem 0 0;
+  padding: 0.6rem 0 0;
+  border-top: 1px solid var(--color-rule);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.term-card-links a {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--color-crimson);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(165, 28, 48, 0.3);
+  align-self: flex-start;
+  padding-bottom: 1px;
+}
+
+.term-card-links a:hover {
+  border-bottom-color: var(--color-crimson);
+}
+
+.term-card-arrow {
+  fill: var(--color-paper);
+}
+
+@keyframes term-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

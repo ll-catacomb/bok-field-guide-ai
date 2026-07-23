@@ -11,7 +11,7 @@ export function Pyramid() {
   const ordered = [...TIERS].sort((a, b) => b.level - a.level);
   const active = TIERS.find((t) => t.key === open) ?? null;
 
-  const widths = { 3: 42, 2: 66, 1: 92 }; // % width per level
+  const widths = { 3: 52, 2: 68, 1: 92 }; // % width per level
 
   return (
     <div className="pyr">
@@ -22,7 +22,7 @@ export function Pyramid() {
             <button
               key={t.key}
               role="listitem"
-              className={`pyr-tier ${isOpen ? "is-open" : ""}`}
+              className={`pyr-tier ${isOpen ? "is-open" : ""} ${t.level === 3 ? "is-apex" : ""}`}
               style={{ width: `${widths[t.level as 1 | 2 | 3]}%` }}
               onClick={() => setOpen(t.key)}
               aria-expanded={isOpen}
@@ -79,6 +79,11 @@ export function Pyramid() {
           clip-path: polygon(8% 0, 92% 0, 100% 100%, 0 100%);
         }
         .pyr-tier:hover { transform: translateY(-1px); }
+        /* The capstone is a true triangle; extra top padding drops the label into
+           the wider lower half so it reads inside the point. */
+        .pyr-tier.is-apex { clip-path: polygon(50% 0, 100% 100%, 0 100%); padding-top: 2.8rem; }
+        .pyr-tier.is-apex .pyr-name { font-size: 1.2rem; }
+        .pyr-tier.is-apex .pyr-short { max-width: 17rem; }
         .pyr-tier.is-open { background: var(--color-crimson); border-color: var(--color-crimson); }
         .pyr-tier.is-open .pyr-name, .pyr-tier.is-open .pyr-short, .pyr-tier.is-open .pyr-level { color: var(--color-paper); }
         .pyr-level { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; color: var(--color-ash); }
