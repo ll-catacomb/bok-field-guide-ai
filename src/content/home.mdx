@@ -9,10 +9,13 @@
 */}
 
 <section className="hero">
-  <span className="plate-label">Field Guide · Bok Center · Plate I</span>
-  <h1 className="hero-title">The Bok Field Guide to Generative AI <span className="hero-title-sub">in Higher Education</span></h1>
-  <hr className="hero-rule" />
-  <p className="hero-lede"> This field guide helps you identify the AI tools Harvard provides members of the FAS.</p>
+  <div className="hero-text">
+    <span className="plate-label">Field Guide · Bok Center · Plate I</span>
+    <h1 className="hero-title">The Bok Field Guide to Generative AI <span className="hero-title-sub">in Higher Education</span></h1>
+    <hr className="hero-rule" />
+    <p className="hero-lede"> This field guide helps you identify the AI tools Harvard provides members of the FAS.</p>
+  </div>
+  <img className="hero-figure" src="/dragon.png" alt="Woodcut-style illustration of Saint George on horseback slaying a dragon, printed in red." />
 </section>
 
 <div className="reading prose">
@@ -108,7 +111,7 @@ Context solves the input side. But what about the output?
 
 In the earliest way of working, you'd get text back from the chat window, read it, copy it, paste it into a file or a document, and take it somewhere else to see if it worked. If it didn't, you'd go back to the chat, describe what went wrong, and iterate. The string came out of the model, and then *you* had to carry it the rest of the way.
 
-The evolution of these tools is largely the story of automating that carry. As you read the tiers below, ask one question: *do I want to see what's happening, or have it handled for me?* The right answer changes with the stakes.
+Each tier is a different **harness** — the software wrapping the engine that manages your context and does the carrying for you, thin in a chat box and thick in a coding agent. The evolution of these tools is largely the story of automating that carry. As you read the tiers below, ask one question: *do I want to see what's happening, or have it handled for me?* The right answer changes with the stakes.
 
 **Chat interfaces** are the exchange at its most literal. You put in a prompt in natural language and read a reply; then you copy what's useful somewhere else to make use of it. String-in, string-out at its most direct. *(Claude.ai, ChatGPT, Gemini in the browser.)*
 
@@ -122,16 +125,64 @@ The evolution of these tools is largely the story of automating that carry. As y
 
 **Autonomous agents** are the final step, so far. Agent modes in Cursor and Claude Code — and standalone agents — don't wait for your prompts. You give them access to your files, your tools, and your keys — the proverbial keys to the car — and a persistent memory, and they drive. You don't control the string in or the string out; you rarely even see the intermediate steps. You just see the final product. This is powerful, and it is genuinely dangerous: an agent can rack up costs, introduce errors, and make irreversible changes without asking.
 
-Notice that the *engine* never changed. A string goes into a model and a string comes out, at every tier. What changes is how many layers sit between you and that exchange — and whether, for the task at hand, those layers help or hide.
+Notice that the *engine* never changed. A string goes into a model and a string comes out, at every tier. What changes is how thick the harness is — how many layers sit between you and that exchange, and whether, for the task at hand, they help or hide.
+
+## Tool calls: giving the model hands and eyes
+
+Now that we understand how harnesses automatically handle your inputs and outputs, we can name the mechanism they use to do it: the **tool call**. A tool is any function the model is allowed to invoke, and in every case the model supplies the *judgment* — it recognizes it needs a tool and writes the call — while the tool supplies the *precision*.
+
+You've already seen one. The Python run in the multiplication demo was a tool call: the model couldn't compute the product, so it wrote code — the code is its *output* — and a code executor ran that code and handed the real answer back. The calculation happened in Python, not in the model.
+
+Tools come in two flavors, along the same input/output axis we've been using — tools that give the model **hands** (to *do* more) and tools that give it **eyes** (to *see* more):
+
+<ToolCategories />
+
+Most tools are code or API based, and they give the model abilities it genuinely doesn't have on its own. The companies ship the "right" tools and the documentation for them — and, as we'll see, you can add your own.
+
+### Unpacking a tool call: RAG on a PDF
+
+The eyes-side tools are worth slowing down on, because the most important one — retrieval — is both powerful and quietly failure-prone. Start with the reason it exists: the context window is finite. A small document you can simply paste in whole, and the model sees every word. But scale up, and the window fills — a whole book, let alone a library, won't come close to fitting:
+
+<RetrievalTradeoff />
+
+That overflow is what **RAG** (retrieval-augmented generation) is built for. Instead of loading everything, it loads only the passages most relevant to your question:
+
+<RagPipeline />
+
+#### What makes a chunk "relevant"?
+
+Everything hinges on that word "relevant," and it has a precise, mechanical meaning. Every chunk — and your question — is turned into a **vector**: a list of numbers that fixes it at a point in space, so that words and passages used in similar ways land near each other. *King* and *queen* sit almost on top of one another; *graphene* is off in a distant region entirely. "Relevant" just means *near*. (The technique that first made this work at scale was **word2vec** — you can explore real, high-dimensional embeddings in [the TensorFlow Embedding Projector](https://projector.tensorflow.org/).)
+
+But that arrangement is a *particular* way of organizing language, not always the *right* one. Where the exact word is the argument — law, medicine, close textual scholarship — near-synonyms like *murder* and *manslaughter* sit side by side in vector space yet are anything but interchangeable. This is the deep reason RAG can fail careful academic work: it retrieves what is *similar*, not necessarily what is *right*.
+
+This whole pipeline — window, chunks, vectors, retrieval — is exactly what **NotebookLM, Claude Projects, and custom GPTs** are doing under the hood.
+
+### Reaching out: APIs, keys, and MCP
+
+The eyes and hands so far have mostly stayed inside the chat. But the most powerful tools reach *out*, to a live service — a Google Doc, a course database, your calendar. The mechanism is an **API** (application programming interface): a service publishes a set of requests it will answer, and the harness sends one, proving it's allowed with a **secret key** — a password for machines. The service checks the key and sends the data back.
+
+<ApiHandshake />
+
+That works beautifully for one service. The trouble is that every service is different: a different API, a different set of methods, its own documentation, its own key — and all of those change over time. Wiring a harness to a dozen services means a dozen bespoke, brittle integrations that someone has to build and keep repairing.
+
+<ApiTools />
+
+This is the problem **MCP** — the **Model Context Protocol** — was built to solve. It's an open standard, best thought of as a universal port (a USB-C for tools). Instead of teaching the harness every service's private API, you run a small **MCP server** for each service; the server holds that service's key and translates the one standard protocol into the service's own calls. The harness only ever needs to speak MCP. Adding a new capability — your library catalog, a lab instrument, a university system — becomes "plug in another server," not "rewrite the app." It's how "the model can use this" becomes something you, not just the vendor, can extend.
 
 ## The map: what Harvard puts on your desk
 
-Harvard FAS provides affiliates access to all three major providers — **Claude, ChatGPT, and Gemini** — and each appears in several of the surfaces above at once. The same engine, wearing four different coats.
+Harvard FAS provides affiliates access to all three major providers — **Claude, ChatGPT, and Gemini** — and each appears in several of the surfaces above at once: the same engine, wrapped in a different harness for each.
 
 The atlas arranges them: providers down the side, surfaces across the top, ordered left-to-right from "you see every string" to "the tool handles more for you." When a new tool appears next year, you'll be able to drop it into this same grid.
 
 <HarvardAtlas />
 
-From here the guide turns from *the tools* to *the teaching*: how to build a course solid enough that AI strengthens it rather than hollows it out. That's the [pyramid](/teaching).
+Beyond the tools themselves, the Bok Center's Learning Lab runs hands-on **faculty workshops** on building with them — including a four-day **Claude Code** intensive. The [Claude Code workshop page](/claude) is an asynchronous walkthrough of what that workshop covers past this field guide: the handful of *primitives* that turn Claude Code from a chat you talk to into a system you can extend and shape to your own teaching.
+
+From here the guide turns from *the tools* to *the teaching*: how to build a course solid enough that AI strengthens it rather than hollows it out. That's the [pyramid](/teaching). And when you're ready to actually make something:
+
+<div className="home-cta">
+  <a href="/recipe" className="cta-btn">So now what? →</a>
+</div>
 
 </div>

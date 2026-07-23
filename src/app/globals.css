@@ -47,7 +47,7 @@ body {
    2. ink grain — a LIGHTEN speckle that only bites into the dark areas (text,
       rules, crimson), eroding them like risograph/letterpress ink. Over white
       it does nothing, so the page stays clean white while the type looks faded. */
-body::before {
+.site-shell::before {
   content: "";
   position: fixed;
   inset: 0;
@@ -58,7 +58,7 @@ body::before {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>");
 }
 
-body::after {
+.site-shell::after {
   content: "";
   position: fixed;
   inset: 0;
@@ -254,6 +254,16 @@ body::after {
   font-size: 1.3rem;
   line-height: 1.15;
   margin: 2.25rem 0 0.75rem;
+}
+
+.prose h4 {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-crimson);
+  margin: 2rem 0 0.6rem;
 }
 
 .prose p {
@@ -478,6 +488,31 @@ body::after {
   padding: clamp(3.5rem, 9vw, 7rem) 1.5rem clamp(2rem, 5vw, 3.5rem);
   max-width: 60rem;
   margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 3rem);
+}
+
+.hero-text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.hero-figure {
+  flex: 0 0 auto;
+  width: clamp(9.6rem, 25vw, 16.8rem);
+  height: auto;
+  align-self: center;
+}
+
+@media (max-width: 640px) {
+  .hero {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+  }
+  .hero-figure {
+    width: clamp(6rem, 30vw, 9rem);
+  }
 }
 
 .hero-kicker {
@@ -550,6 +585,31 @@ body::after {
   color: var(--color-ink-soft);
   max-width: 40rem;
   margin: 1.25rem 0 0;
+}
+
+/* Home-page call to action → the recipe page. */
+.home-cta {
+  display: flex;
+  justify-content: center;
+  margin: 3.5rem 0 1rem;
+}
+
+.home-cta .cta-btn {
+  font-family: var(--font-gothic);
+  font-size: clamp(1.4rem, 4vw, 1.9rem);
+  color: var(--color-paper);
+  background: var(--color-crimson);
+  border: 1px solid var(--color-crimson);
+  padding: 0.65rem 1.7rem;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: background 180ms ease;
+}
+
+.home-cta .cta-btn:hover {
+  color: var(--color-paper);
+  background: var(--color-crimson-deep);
+  border-color: var(--color-crimson-deep);
 }
 
 @media (prefers-reduced-motion: reduce) {

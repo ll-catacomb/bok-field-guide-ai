@@ -50,28 +50,23 @@ export function HarvardAtlas() {
         <ul>
           {COMPANIONS.map((c) => (
             <li key={c.name}>
-              <span className="atlas-comp-name">{c.name}</span>
+              {c.href ? (
+                <a
+                  className="atlas-comp-name"
+                  href={c.href}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {c.name}
+                </a>
+              ) : (
+                <span className="atlas-comp-name">{c.name}</span>
+              )}
               <span className="atlas-comp-note">{c.note}</span>
             </li>
           ))}
         </ul>
       </div>
-
-      <p className="atlas-caveat annotation">
-        Data classification: the caveats above apply to the{" "}
-        <strong>Harvard-provided</strong> versions of these tools. Public/free
-        versions carry different data-handling terms and should not be used for
-        confidential Harvard work. When in doubt, check the Bok Center&rsquo;s{" "}
-        <a
-          href="https://bokcenter.harvard.edu/artificial-intelligence"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Teaching in the Age of AI
-        </a>{" "}
-        guidance and Harvard&rsquo;s data-security policy before uploading
-        student data.
-      </p>
 
       <style>{`
         .atlas { margin: 2.5rem 0; }
@@ -94,7 +89,6 @@ export function HarvardAtlas() {
         .atlas-companions li { display: flex; flex-direction: column; gap: 0.15rem; padding-left: 0.9rem; border-left: 2px solid var(--color-gold); }
         .atlas-comp-name { font-family: var(--font-mono); font-size: 13px; }
         .atlas-comp-note { font-size: 13px; color: var(--color-ink-soft); }
-        .atlas-caveat { display: block; margin-top: 1.75rem; line-height: 1.5; }
         @media (max-width: 720px) {
           .atlas-row { grid-template-columns: 1fr 1fr; }
           .atlas-head { display: none; }

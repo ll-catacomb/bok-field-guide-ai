@@ -66,13 +66,13 @@ export const PROVIDERS: Provider[] = [
 export type Companion = {
   name: string;
   note: string;
+  href?: string;
 };
 
 // Beyond raw chat: purpose-built tools worth naming for teaching contexts.
 export const COMPANIONS: Companion[] = [
-  { name: "NotebookLM", note: "Google. Grounds answers strictly in sources you upload — good for course readings; generates audio overviews." },
-  { name: "Gemini in Google Workspace", note: "Drafting and summarizing inside Docs, Gmail, Slides, and Sheets." },
-  { name: "Google AI Studio", note: "A sandbox for prompting Gemini directly and tuning parameters." },
-  { name: "Claude Projects", note: "Persistent context + files scoped to one course or task, shareable with collaborators." },
-  { name: "Custom GPTs", note: "Reusable ChatGPT assistants configured with instructions and reference files." },
+  { name: "NotebookLM", note: "Google. A very good version of RAG: grounds answers strictly in sources you upload — good for course readings; generates audio overviews.", href: "https://notebooklm.google.com/" },
+  { name: "Google AI Studio", note: "A sandbox for prompting Gemini directly and tuning parameters.", href: "https://aistudio.google.com/" },
+  { name: "Custom GPTs", note: "Reusable ChatGPT assistants configured with instructions and reference files.", href: "https://help.openai.com/en/articles/8554397-creating-and-editing-gpts" },
+  { name: "Gemini Gems", note: "Google. Reusable Gemini assistants configured with instructions and reference files — the Gemini counterpart to custom GPTs.", href: "https://gemini.google/overview/gems/" },
 ];

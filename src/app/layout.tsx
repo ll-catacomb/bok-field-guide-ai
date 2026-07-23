@@ -6,8 +6,6 @@ import {
   Grenze_Gotisch,
 } from "next/font/google";
 import "./globals.css";
-import { Nav } from "@/components/Nav";
-import { SiteFooter } from "@/components/SiteFooter";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -54,13 +52,7 @@ export default function RootLayout({
       lang="en"
       className={`${fraunces.variable} ${garamond.variable} ${mono.variable} ${gothic.variable}`}
     >
-      <body>
-        <div id="app-root">
-          <Nav />
-          {children}
-          <SiteFooter />
-        </div>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

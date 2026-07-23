@@ -8,8 +8,10 @@ export function Nav() {
       </Link>
       <nav className="links">
         <Link href="/">Tutorial</Link>
+        <Link href="/recipe">First Project</Link>
         <Link href="/teaching">Teaching</Link>
         <Link href="/gallery">Gallery</Link>
+        <Link href="/claude" className="nav-claude">Claude Code</Link>
       </nav>
     </header>
   );
