@@ -31,3 +31,8 @@ yarn-error.log*
 .vscode/*
 !.vscode/extensions.json
 .idea
+
+# Gallery: held story content + images (vet before publishing)
+/_incoming/
+/src/content/gallery/
+/public/gallery/

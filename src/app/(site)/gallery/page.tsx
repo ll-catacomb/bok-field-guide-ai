@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { CatalogStripe } from "@/components/CatalogStripe";
 import { TermText } from "@/components/TermText";
 import { PROJECTS, TIER_LABEL } from "@/data/projects";
+import { getStories } from "@/lib/gallery";
 
 export const metadata: Metadata = {
   title: "Gallery — AI for Higher Ed",
@@ -10,6 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default function GalleryPage() {
+  const stories = getStories();
   return (
     <main>
       <CatalogStripe slug="/gallery" id="GA03" />
@@ -19,8 +22,9 @@ export default function GalleryPage() {
         <h1 className="hero-title">The Gallery of Specimens</h1>
         <hr className="hero-rule" />
         <p className="hero-lede">
-          A growing list of ideas — from faculty, students, and Bok Center
-          fellows — for using AI in teaching, each accessioned by the{" "}
+          Project stories from the Learning Lab, alongside a growing list of
+          ideas — from faculty, students, and Bok Center fellows — for using AI
+          in teaching, each accessioned by the{" "}
           <a href="/teaching" className="gal-herolink">
             pyramid
           </a>{" "}
@@ -30,6 +34,32 @@ export default function GalleryPage() {
 
       <section className="gal-wrap">
         <div className="gal-grid">
+          {stories.map((s) => (
+            <Link className="gal-card gal-card-story" href={`/gallery/${s.slug}`} key={s.slug}>
+              {s.hero && (
+                <div className="gal-storythumb">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={s.hero} alt="" loading="lazy" />
+                </div>
+              )}
+              <div className="gal-cardhead">
+                <span className="gal-plate">Story</span>
+                <div className="gal-tiers">
+                  {s.tiers.map((t) => (
+                    <span key={t} className={`gal-tier gal-tier-${t}`}>
+                      {TIER_LABEL[t as keyof typeof TIER_LABEL] ?? t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <h2 className="gal-title font-display">{s.title}</h2>
+              {s.courses && <p className="gal-epithet">{s.courses}</p>}
+              <p className="gal-blurb gal-blurb-clamp">
+                <TermText>{s.shortDescription}</TermText>
+              </p>
+              <span className="gal-more">Read the story →</span>
+            </Link>
+          ))}
           {PROJECTS.map((p, i) => (
             <article className="gal-card" key={p.key}>
               <div className="gal-cardhead">
@@ -72,6 +102,17 @@ export default function GalleryPage() {
         .gal-wrap { max-width: 70rem; margin: 0 auto; padding: 1rem clamp(1rem, 4vw, 2.5rem) 0; }
         .gal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(23rem, 1fr)); gap: 1.5rem; align-items: start; }
         .gal-card { display: flex; flex-direction: column; gap: 0.45rem; border: 1px solid var(--color-rule); border-top: 3px solid var(--color-crimson); background: var(--color-paper); padding: 1.15rem 1.25rem 1.3rem; }
+        .gal-card-story { text-decoration: none; color: inherit; padding: 0 0 1.1rem; overflow: hidden; transition: border-color 160ms ease, transform 160ms ease; }
+        .gal-card-story:hover { border-color: var(--color-crimson); transform: translateY(-2px); }
+        .gal-storythumb { aspect-ratio: 16 / 9; overflow: hidden; background: var(--color-paper-deep); margin-bottom: 0.7rem; }
+        .gal-storythumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .gal-card-story .gal-cardhead,
+        .gal-card-story .gal-title,
+        .gal-card-story .gal-epithet,
+        .gal-card-story .gal-blurb,
+        .gal-card-story .gal-more { padding-left: 1.25rem; padding-right: 1.25rem; }
+        .gal-blurb-clamp { display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+        .gal-more { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; color: var(--color-crimson); margin-top: 0.7rem; }
         .gal-cardhead { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; margin-bottom: 0.15rem; }
         .gal-plate { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.14em; color: var(--color-ash); }
         .gal-tiers { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; margin-left: auto; }
