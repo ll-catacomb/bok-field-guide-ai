@@ -1,9 +1,10 @@
 "use client";
 
-/* /claude — the Claude Code workshop, told in the-claude-report's scrollytelling
-   style (the Bok Center house look for Claude material). Days 1–2 live in the
-   field guide; this page is the asynchronous companion to days 3–4: the five
-   primitives that extend Claude Code. Content adapted from mw-claude-quests. */
+/* /claude — the Claude Code workshop, in the-claude-report's scrollytelling
+   style. Copy is adapted from that report ("Recipes, Repos & Practicing
+   Teaching"), edited to reference this field guide and to fold in the
+   claude-quests material — the harness and the five primitives. Story beats
+   1–4 hold real workshop-photo slots (drop images into /public/claude/). */
 
 import React from "react";
 import Link from "next/link";
@@ -20,7 +21,91 @@ import {
   FONT_MONO,
 } from "./_experience";
 
-/* ---------- spec card: a primitive's key facts, glassmorphic ---------- */
+/* ---------- reusable image slot (placeholder until a src is set) ---------- */
+
+function ImageSlot({ src, alt, caption, label, ratio = "4 / 3" }) {
+  const C = useC();
+  return (
+    <figure style={{ margin: 0 }}>
+      <div
+        style={{
+          position: "relative",
+          aspectRatio: ratio,
+          borderRadius: 16,
+          overflow: "hidden",
+          border: `1px solid ${C.line}`,
+          background: C.card,
+          backdropFilter: "blur(8px)",
+        }}
+      >
+        {src ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={src}
+            alt={alt || ""}
+            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+          />
+        ) : (
+          <div
+            style={{
+              position: "absolute",
+              inset: 12,
+              border: `1px dashed ${C.kraft}`,
+              borderRadius: 10,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 8,
+              textAlign: "center",
+              padding: 16,
+            }}
+          >
+            <span style={{ fontSize: 22, color: C.clay }}>▦</span>
+            <span
+              style={{
+                fontFamily: FONT_MONO,
+                fontSize: 11,
+                letterSpacing: "0.16em",
+                textTransform: "uppercase",
+                color: C.slate,
+              }}
+            >
+              image slot
+            </span>
+            <span
+              style={{
+                fontFamily: FONT_MONO,
+                fontSize: 12,
+                color: C.kraft,
+                maxWidth: 260,
+                lineHeight: 1.5,
+              }}
+            >
+              {label}
+            </span>
+          </div>
+        )}
+      </div>
+      {caption && (
+        <figcaption
+          style={{
+            fontFamily: FONT_MONO,
+            fontSize: 11.5,
+            letterSpacing: "0.04em",
+            color: C.kraft,
+            marginTop: 12,
+            lineHeight: 1.5,
+          }}
+        >
+          {caption}
+        </figcaption>
+      )}
+    </figure>
+  );
+}
+
+/* ---------- spec card: the five primitives, glassmorphic ---------- */
 
 function SpecCard({ glyph, rows }) {
   const C = useC();
@@ -55,7 +140,7 @@ function SpecCard({ glyph, rows }) {
             key={r.k}
             style={{
               display: "grid",
-              gridTemplateColumns: "minmax(88px, 34%) 1fr",
+              gridTemplateColumns: "minmax(84px, 30%) 1fr",
               gap: 14,
               alignItems: "baseline",
               borderTop: `1px solid ${C.line}`,
@@ -66,7 +151,7 @@ function SpecCard({ glyph, rows }) {
               style={{
                 fontFamily: FONT_MONO,
                 fontSize: 10.5,
-                letterSpacing: "0.14em",
+                letterSpacing: "0.12em",
                 textTransform: "uppercase",
                 color: C.rust,
                 margin: 0,
@@ -126,7 +211,7 @@ function Hero() {
       >
         <motion.div variants={stagger} initial="hidden" animate="show">
           <motion.div variants={fadeUp}>
-            <Eyebrow>The Bok Field Guide · Claude Code Workshop</Eyebrow>
+            <Eyebrow>The Bok Field Guide · A report from the Learning Lab</Eyebrow>
           </motion.div>
 
           <motion.h1
@@ -143,11 +228,11 @@ function Hero() {
             }}
           >
             <em style={{ fontStyle: "italic", fontWeight: 480, color: C.clay }}>
-              Skills,
+              Recipes,
             </em>{" "}
-            Hooks &amp;
+            Repos &amp;
             <br />
-            Subagents
+            Practicing Teaching
           </motion.h1>
 
           <motion.p
@@ -163,11 +248,10 @@ function Hero() {
               margin: "30px 0 0",
             }}
           >
-            The Bok Center runs four-day faculty intensives on building with
-            Claude. Days one and two — the engine, context, and tools — are the
-            field guide you just read. This is the asynchronous companion to days
-            three and four: the five primitives that turn Claude Code from a chat
-            you talk to into a system you extend.
+            Three back-to-back four-day intensives taught Harvard faculty to build
+            with Claude. We expected a few brave volunteers — and all three weeks
+            filled immediately. The field guide you just read is the engine
+            underneath; this is what happened when faculty put their hands on it.
           </motion.p>
 
           <motion.div
@@ -183,9 +267,9 @@ function Hero() {
               color: C.ink,
             }}
           >
-            <span>🗓 A four-day faculty intensive</span>
-            <span>📍 Bok Center · Learning Lab</span>
-            <span>✳ Skills · ▤ Hooks · ▮ MCPs · ◯ Commands · ✦ Subagents</span>
+            <span>🗓 May 18–21 · June 1–4 · June 8–10, 2026</span>
+            <span>📍 Bok Center Learning Lab</span>
+            <span>✳ Chat · ▤ Cowork · ▮ Code</span>
           </motion.div>
         </motion.div>
       </motion.div>
@@ -226,37 +310,37 @@ function Hero() {
   );
 }
 
-/* ---------------- three ways to steer ---------------- */
+/* ---------------- three signatures (the recipe metaphor) ---------------- */
 
-const STEER = [
+const SIGNATURES = [
   {
-    tag: "model-invoked",
+    tag: "hello world",
     glyph: "✳",
-    title: "Claude decides",
-    body: "Claude reads the room and chooses — which skill fits this task, which tool to call, when to spawn a subagent. Probabilistic, flexible, and the source of most of its intelligence.",
-    foot: "skills · subagents · MCP tools",
+    title: "Hello, World — with recipes",
+    body: "We handed Claude a junk folder of recipe photos — handwriting, scans, terrible filenames — and it came back a clean, browsable website. A no-prerequisite on-ramp that ran on Day 1 of all three weeks: messy in, structured out.",
+    foot: "the burst",
   },
   {
-    tag: "harness-triggered",
+    tag: "context",
     glyph: "▤",
-    title: "The harness decides",
-    body: "Underneath the intelligence sits a deterministic layer. When a lifecycle event fires — a file saved, a turn finished — a shell command runs. Every time, whether the model wants it or not.",
-    foot: "hooks",
+    title: "The recipe as a way of thinking",
+    body: "Ingredients + instructions → dish. The same frame the field guide uses for the context window scaled all the way up to context engineering — a CLAUDE.md as the cookbook, a skill as a perfected recipe card. The most technical idea, taught without jargon.",
+    foot: "the weave",
   },
   {
-    tag: "user-invoked",
+    tag: "memory",
     glyph: "▮",
-    title: "You decide",
-    body: "Sometimes you want the shortcut in your own hand. You type a slash command; the harness expands a template into a full prompt and sends it. A named workflow, begun on purpose.",
-    foot: "slash commands",
+    title: "A classroom that remembered itself",
+    body: "Each morning faculty pulled a repo holding the day before: yesterday's transcript, a distilled 'top 10 takeaways,' and a knowledge base they could literally ask questions of. The course modeled the practice it taught.",
+    foot: "the columns",
   },
 ];
 
-function Steer() {
+function Signatures() {
   const C = useC();
   return (
     <section
-      id="steer"
+      id="signatures"
       style={{
         position: "relative",
         zIndex: 1,
@@ -274,7 +358,7 @@ function Steer() {
         style={{ maxWidth: 1240, margin: "0 auto" }}
       >
         <motion.div variants={fadeUp}>
-          <Eyebrow>Who decides what runs</Eyebrow>
+          <Eyebrow>Three signatures</Eyebrow>
         </motion.div>
         <motion.h2
           variants={fadeUp}
@@ -290,7 +374,7 @@ function Steer() {
             maxWidth: 820,
           }}
         >
-          Three hands can reach the wheel
+          One metaphor held the whole series together
         </motion.h2>
         <motion.p
           variants={fadeUp}
@@ -303,9 +387,10 @@ function Steer() {
             margin: "0 0 56px",
           }}
         >
-          Everything Claude Code does is set in motion by one of three parties.
-          Knowing which one is holding the wheel is the whole mental model —
-          every primitive that follows is just a variation on it.
+          The field guide you just read explains the engine. In the room we
+          organized four days around a single, friendly idea — a recipe — and let
+          it carry faculty from their first delight to real fluency. Three moves
+          did most of the work.
         </motion.p>
 
         <div
@@ -315,7 +400,7 @@ function Steer() {
             gap: 22,
           }}
         >
-          {STEER.map((s) => (
+          {SIGNATURES.map((s) => (
             <motion.article
               key={s.tag}
               variants={fadeUp}
@@ -409,76 +494,74 @@ function Steer() {
   );
 }
 
-/* ---------------- the five primitives ---------------- */
+/* ---------------- the story (alternating text + image/spec) ---------------- */
 
-const PRIMITIVES = [
+const PRIMITIVE_ROWS = [
+  { k: "Skills", v: "expertise Claude loads when a task matches" },
+  { k: "Hooks", v: "shell commands the harness runs, every time" },
+  { k: "MCPs", v: "a standard port to outside tools and data" },
+  { k: "Commands", v: "a workflow you trigger by name" },
+  { k: "Subagents", v: "a clean, isolated context for a side task" },
+];
+
+const STORY = [
   {
-    eyebrow: "Primitive 01 · Skills",
-    glyph: "✳",
-    title: "Expertise Claude loads when it fits",
-    body: "A skill is a folder with a SKILL.md inside: a short description up top, a playbook below. Claude reads only the descriptions at the start of a session, and loads a skill's full body the moment your task matches — progressive disclosure, so you can keep dozens on hand and pay for none of them until one applies.",
-    spec: [
-      { k: "Invoked by", v: "the model, on match" },
-      { k: "Lives in", v: "SKILL.md + a folder" },
-      { k: "Loads", v: "progressively, on demand" },
-      { k: "Good for", v: "teaching Claude how to do a task well" },
-    ],
+    eyebrow: "Beat 01 · Hello, World",
+    title: "Messy in, structured out",
+    body: "A folder of photographed recipes — handwritten cards, magazine scans, junk filenames — handed to Claude with nothing else. It recognized the dishes, renamed the files, transcribed each recipe, and built a small browsable website. You could feel the delight in the room when the files came back clean.",
+    image: {
+      src: null,
+      label: "the recipe website: messy photos → clean card-grid site (/public/claude/recipe-website.jpg)",
+      caption: "▦ Recipe photos in → a browsable website out.",
+      alt: "Recipe photos transformed into a website",
+    },
   },
   {
-    eyebrow: "Primitive 02 · Hooks",
-    glyph: "▤",
-    title: "Automation that isn't optional",
-    body: "A hook is a shell command the harness runs at a set moment — before a tool call, after an edit, when a turn ends. The model has no say. It's the deterministic floor beneath all the probabilistic reasoning: when the event fires, the command runs, every time, whether Claude wants it to or not.",
-    spec: [
-      { k: "Invoked by", v: "the harness, on lifecycle events" },
-      { k: "Lives in", v: "a settings JSON file" },
-      { k: "Loads", v: "every time — deterministic" },
-      { k: "Good for", v: "what must happen, guaranteed" },
-    ],
+    eyebrow: "Beat 02 · The connective move",
+    title: "Faculty's own recipes, prototyped overnight",
+    body: "At a day's close, faculty filled out paper 'recipe cards' — Ingredients, Instructions, Serving — each a real teaching problem. It's the same card the field guide hands you on the recipe page. Overnight we scaffolded every one into a working starter project; faculty walked in the next morning and found their own half-formed idea already running in a folder.",
+    image: {
+      src: null,
+      label: "handwritten recipe cards + the overnight prototype they became (/public/claude/recipe-cards.jpg)",
+      caption: "▦ A paper recipe card and the prototype it became.",
+      alt: "Handwritten recipe cards and generated prototypes",
+    },
   },
   {
-    eyebrow: "Primitive 03 · MCPs",
-    glyph: "▮",
-    title: "A standard port for the outside world",
-    body: "An MCP server is a separate process that speaks the Model Context Protocol, an open standard from Anthropic. Connect one and Claude gains new tools that look just like its built-ins — but reach a database, a repository, your calendar. One protocol, any number of services, each key held server-side.",
-    spec: [
-      { k: "Invoked by", v: "the model, as tools" },
-      { k: "Lives in", v: "a separate server process" },
-      { k: "Speaks", v: "the Model Context Protocol" },
-      { k: "Good for", v: "reaching external systems" },
-    ],
+    eyebrow: "Beat 03 · Context engineering",
+    title: "One line changes everything",
+    body: "The field guide shows how everything lands in one context window. Here faculty saw it bite: Claude was ending every answer with a limerick — a single line buried in a CLAUDE.md file. Edited live, the behavior flipped instantly. One sentence in one markdown file steered a whole folder. That is context engineering, taught as a moment of delight — and nearly everyone wrote and ran their own.",
+    image: {
+      src: null,
+      label: "the CLAUDE.md 'limerick' line / a faculty member's own context file (/public/claude/claude-md.jpg)",
+      caption: "▦ The CLAUDE.md behind the limerick reveal.",
+      alt: "A CLAUDE.md context file",
+    },
   },
   {
-    eyebrow: "Primitive 04 · Slash Commands",
-    glyph: "◯",
-    title: "A workflow behind a short name",
-    body: "Type /summarize-paper and the harness expands a markdown template into a full prompt — arguments filled in, files inlined, shell output embedded — before Claude ever sees it. Deterministic dispatch on the way in, the exact counterpart to a hook firing on the way out.",
-    spec: [
-      { k: "Invoked by", v: "you, by name" },
-      { k: "Lives in", v: ".claude/commands/*.md" },
-      { k: "Expands", v: "on the way in" },
-      { k: "Good for", v: "a shortcut you trigger by hand" },
-    ],
+    eyebrow: "Beat 04 · What got built",
+    title: "Things faculty actually built",
+    body: "Not toy ideas: an oral-exam practice coach that gives students feedback before their first viva; a folklore archive woven into a website in an afternoon; a make-up-exam generator; lecture notes auto-built from class recordings; an anticipate-student-questions tool for chemistry teaching fellows. The excitement of the people who built them is the argument.",
+    image: {
+      src: null,
+      label: "screenshots of faculty-built projects — oral-exam coach, folklore site, etc. (/public/claude/faculty-projects.jpg)",
+      caption: "▦ A few of the things faculty built and kept.",
+      alt: "Faculty-built projects",
+    },
   },
   {
-    eyebrow: "Primitive 05 · Subagents",
-    glyph: "✦",
-    title: "A clean context for a side task",
-    body: "A subagent is an isolated Claude spawned for one job. It works in its own context window and returns only its final answer — all the searching and half-read files stay behind and vanish. It keeps the main conversation uncluttered, and lets focused work run in parallel.",
-    spec: [
-      { k: "Invoked by", v: "delegation from the main agent" },
-      { k: "Lives in", v: ".claude/agents/*.md" },
-      { k: "Runs in", v: "its own context window" },
-      { k: "Good for", v: "focused work without the clutter" },
-    ],
+    eyebrow: "Beat 05 · Under the hood",
+    title: "The levers underneath the recipe",
+    body: "By the last day, faculty wanted to know what did the steering. Underneath sits the harness — the same program the field guide introduces when it turns from the engine to the tools — and a small set of primitives you configure to shape it. Skills, hooks, MCPs, slash commands, subagents: five levers, each a different way to decide what Claude does and when. They are the substance of days three and four, and the reason a recipe can harden into a repeatable tool.",
+    spec: { glyph: "✦", rows: PRIMITIVE_ROWS },
   },
 ];
 
-function Primitives() {
+function Story() {
   const C = useC();
   return (
     <section
-      id="primitives"
+      id="story"
       style={{
         position: "relative",
         zIndex: 1,
@@ -497,7 +580,7 @@ function Primitives() {
           style={{ marginBottom: 70 }}
         >
           <motion.div variants={fadeUp}>
-            <Eyebrow>The building blocks</Eyebrow>
+            <Eyebrow>How the weeks actually went</Eyebrow>
           </motion.div>
           <motion.h2
             variants={fadeUp}
@@ -513,14 +596,14 @@ function Primitives() {
               maxWidth: 760,
             }}
           >
-            Five primitives, one lever each
+            From a junk drawer of photos to a way of working
           </motion.h2>
         </motion.div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: "clamp(56px, 9vw, 110px)" }}>
-          {PRIMITIVES.map((p, i) => (
+          {STORY.map((beat, i) => (
             <motion.div
-              key={p.title}
+              key={beat.title}
               initial={{ opacity: 0, y: 32 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-110px" }}
@@ -534,7 +617,7 @@ function Primitives() {
             >
               <div style={{ order: i % 2 === 0 ? 0 : 1 }}>
                 <div style={{ marginBottom: 16 }}>
-                  <Eyebrow light>{p.eyebrow}</Eyebrow>
+                  <Eyebrow light>{beat.eyebrow}</Eyebrow>
                 </div>
                 <h3
                   style={{
@@ -548,7 +631,7 @@ function Primitives() {
                     lineHeight: 1.12,
                   }}
                 >
-                  {p.title}
+                  {beat.title}
                 </h3>
                 <p
                   style={{
@@ -560,10 +643,19 @@ function Primitives() {
                     maxWidth: 540,
                   }}
                 >
-                  {p.body}
+                  {beat.body}
                 </p>
               </div>
-              <SpecCard glyph={p.glyph} rows={p.spec} />
+              {beat.spec ? (
+                <SpecCard glyph={beat.spec.glyph} rows={beat.spec.rows} />
+              ) : (
+                <ImageSlot
+                  src={beat.image.src}
+                  alt={beat.image.alt}
+                  caption={beat.image.caption}
+                  label={beat.image.label}
+                />
+              )}
             </motion.div>
           ))}
         </div>
@@ -572,20 +664,20 @@ function Primitives() {
   );
 }
 
-/* ---------------- how it fits the workshop ---------------- */
+/* ---------------- by the numbers ---------------- */
 
 const FACTS = [
-  { k: "Days 1–2", v: "The engine, context, and handling output — covered by the field guide you just read. Start there if you skipped it." },
-  { k: "Days 3–4", v: "Extending Claude Code: the five primitives above, each built and run against a real teaching problem you bring." },
-  { k: "Prerequisite", v: "No coding. If you followed the field guide, you're ready — the workshop builds only on those intuitions." },
-  { k: "What you leave with", v: "Your own skill, hook, or command running in a folder — Claude Code shaped to how you actually work." },
+  { k: "Demand", v: "Three intensive weeks — every one oversubscribed. We planned one and added two more; both filled immediately." },
+  { k: "Reach", v: "Twelve sessions across three runs (four mornings each), 1:00–2:30pm in the Learning Lab studio." },
+  { k: "The on-ramp", v: "The recipe-photos → website demo opened Day 1 of all three weeks — a signature, not a one-off." },
+  { k: "Built by faculty", v: "Oral-exam coaches, archive sites, grading helpers, make-up-exam generators, lecture notes from recordings." },
 ];
 
 function Numbers() {
   const C = useC();
   return (
     <section
-      id="fit"
+      id="numbers"
       style={{
         position: "relative",
         zIndex: 1,
@@ -603,7 +695,7 @@ function Numbers() {
         style={{ maxWidth: 1100, margin: "0 auto" }}
       >
         <motion.div variants={fadeUp}>
-          <Eyebrow>How this fits the workshop</Eyebrow>
+          <Eyebrow>Why faculty showed up</Eyebrow>
         </motion.div>
         <motion.p
           variants={fadeUp}
@@ -616,8 +708,8 @@ function Numbers() {
             margin: "22px 0 0",
           }}
         >
-          The live workshop is hands-on and four days long. This page is the part
-          you can carry home and work through at your own pace.
+          The hardest evidence we have is demand — and it points the same way as
+          everything we saw in the room.
         </motion.p>
 
         <div
@@ -730,9 +822,9 @@ function Closing() {
             margin: "24px 0 22px",
           }}
         >
-          Stop prompting it.
+          We don't script teaching.
           <br />
-          <em style={{ fontStyle: "italic", color: C.clay }}>Start extending it.</em>
+          <em style={{ fontStyle: "italic", color: C.clay }}>We practice it.</em>
         </motion.h2>
         <motion.p
           variants={fadeUp}
@@ -745,10 +837,11 @@ function Closing() {
             margin: "0 auto 34px",
           }}
         >
-          The field guide showed you the engine; the primitives are the levers.
-          Write one skill, wire one hook, save one command, and Claude Code stops
-          being a chat you visit and becomes a tool that fits your hand. That is
-          the whole workshop — the rest is practice.
+          Build it with the people in the room, capture what emerges, iterate the
+          next day. Faculty using AI on their own work — research, writing,
+          administration — is the precondition for designing good AI-aware work
+          for students. The field guide is the primer; the recipe card is where
+          your own first project begins.
         </motion.p>
         <motion.div
           variants={fadeUp}
@@ -773,19 +866,19 @@ export default function ClaudeExperience() {
         brand: { name: "Bok Field Guide", sub: "/ Claude Code" },
         links: [
           { href: "/", label: "← Field Guide" },
-          { href: "#steer", label: "Steering" },
-          { href: "#primitives", label: "The primitives" },
-          { href: "#fit", label: "How it fits" },
+          { href: "#signatures", label: "The metaphor" },
+          { href: "#story", label: "What happened" },
+          { href: "#numbers", label: "By the numbers" },
         ],
       }}
-      footer={{ tagline: "Claude Code workshop · built with Claude, naturally" }}
+      footer={{ tagline: "A report · built with Claude, naturally" }}
     >
       <Hero />
-      <Interlude from="✳ chat" to="▤ extend" label="from talking to building" />
-      <Steer />
-      <Interlude from="✳ model" to="▮ harness" label="three hands on the wheel" />
-      <Primitives />
-      <Interlude from="▮ primitives" to="◯ practice" label="bring your own problem" />
+      <Interlude from="✳ hello world" to="▤ context" label="the recipe deepens" />
+      <Signatures />
+      <Interlude from="▤ context" to="▮ memory" label="the field remembers" />
+      <Story />
+      <Interlude from="▮ memory" to="◯ practice" label="everything converges" />
       <Numbers />
       <Closing />
     </Shell>
