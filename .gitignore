@@ -32,7 +32,5 @@ yarn-error.log*
 !.vscode/extensions.json
 .idea
 
-# Gallery: held story content + images (vet before publishing)
+# Gallery: raw drafts stay private (internal notes, client names, all source images)
 /_incoming/
-/src/content/gallery/
-/public/gallery/

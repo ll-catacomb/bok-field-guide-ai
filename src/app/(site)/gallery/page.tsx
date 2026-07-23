@@ -100,8 +100,8 @@ export default function GalleryPage() {
 
       <style>{`
         .gal-wrap { max-width: 70rem; margin: 0 auto; padding: 1rem clamp(1rem, 4vw, 2.5rem) 0; }
-        .gal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(23rem, 1fr)); gap: 1.5rem; align-items: start; }
-        .gal-card { display: flex; flex-direction: column; gap: 0.45rem; border: 1px solid var(--color-rule); border-top: 3px solid var(--color-crimson); background: var(--color-paper); padding: 1.15rem 1.25rem 1.3rem; }
+        .gal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(23rem, 1fr)); gap: 1.5rem; grid-auto-rows: 1fr; }
+        .gal-card { display: flex; flex-direction: column; gap: 0.45rem; height: 100%; overflow: hidden; border: 1px solid var(--color-rule); border-top: 3px solid var(--color-crimson); background: var(--color-paper); padding: 1.15rem 1.25rem 1.3rem; }
         .gal-card-story { text-decoration: none; color: inherit; padding: 0 0 1.1rem; overflow: hidden; transition: border-color 160ms ease, transform 160ms ease; }
         .gal-card-story:hover { border-color: var(--color-crimson); transform: translateY(-2px); }
         .gal-storythumb { aspect-ratio: 16 / 9; overflow: hidden; background: var(--color-paper-deep); margin-bottom: 0.7rem; }
@@ -122,7 +122,7 @@ export default function GalleryPage() {
         .gal-status { font-size: 9.5px; }
         .gal-title { font-size: 1.35rem; line-height: 1.08; font-weight: 400; margin: 0.15rem 0 0; }
         .gal-epithet { font-style: italic; font-size: 13px; color: var(--color-ash); margin: 0; }
-        .gal-blurb { font-size: 14px; color: var(--color-ink-soft); margin: 0.4rem 0 0; line-height: 1.5; }
+        .gal-blurb { font-size: 14px; color: var(--color-ink-soft); margin: 0.4rem 0 0; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 6; -webkit-box-orient: vertical; overflow: hidden; }
         .gal-herolink { color: var(--color-crimson); }
         .gal-seealso { max-width: 42rem; margin: 2.5rem auto 0; font-size: 14px; color: var(--color-ink-soft); }
         .gal-seealso a { color: var(--color-crimson); font-family: var(--font-mono); font-size: 13px; text-decoration: none; border-bottom: 1px solid rgba(165,28,48,0.3); }
