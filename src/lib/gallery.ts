@@ -21,7 +21,6 @@ const ORDER = [
   "complit-126x-oral-exam-tool",
   "astro-17-ai-integration",
   "hls-civ-pro-pipeline",
-  "studio-behind-the-scenes",
 ];
 
 export type Story = {

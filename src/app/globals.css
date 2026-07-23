@@ -236,7 +236,7 @@ body {
 .reading {
   max-width: 60rem;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 clamp(1.5rem, 6vw, 4rem);
 }
 
 .prose h2 {
@@ -485,7 +485,7 @@ body {
 
 .hero {
   position: relative;
-  padding: clamp(3.5rem, 9vw, 7rem) 1.5rem clamp(2rem, 5vw, 3.5rem);
+  padding: clamp(3.5rem, 9vw, 7rem) clamp(1.5rem, 6vw, 4rem) clamp(2rem, 5vw, 3.5rem);
   max-width: 60rem;
   margin: 0 auto;
 }
