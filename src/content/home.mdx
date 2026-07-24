@@ -88,11 +88,11 @@ The budget doesn't reset between messages. It fills as the conversation grows. W
 
 <ContextFill />
 
-When the window fills, most tools <Term id="compaction"><strong>compact</strong></Term> rather than stop: they summarize the older turns and pass the summary forward, so the chat feels seamless. The catch is that the model is now reasoning from a compressed, lossy recap — the reason a very long thread quietly loses the thread.
+When the window fills, most tools <Term id="compaction"><strong>compact</strong></Term> rather than stop: they summarize the older turns and pass the summary forward, so the chat feels seamless. The catch is that the model is now reasoning from a compressed, lossy recap — the reason a very long thread loses the thread.
 
 ## Memory: the first automatic context
 
-If every new chat opens a blank window, how does a tool ever seem to remember you? By keeping a <Term id="memory"><strong>memory</strong></Term>: a small note it writes and quietly loads into each new thread. It's the simplest form of *automatic context*, context you never pasted, added for you.
+If every new chat opens a blank window, how does a tool ever seem to remember you? By keeping a <Term id="memory"><strong>memory</strong></Term>: a small note it writes and loads into each new thread. It's the simplest form of *automatic context*, context you never pasted, added for you.
 
 <Memory />
 
@@ -141,7 +141,7 @@ Most tools are code or API based, and they give the model abilities it genuinely
 
 ### Unpacking a tool call: RAG on a PDF
 
-The eyes-side tools are worth slowing down on, because the most important one — retrieval — is both powerful and quietly failure-prone. Start with the reason it exists: the context window is finite. A small document you can simply paste in whole, and the model sees every word. But scale up, and the window fills. A whole book, let alone a library, won't come close to fitting:
+The eyes-side tools are worth slowing down on, because the most important one — retrieval — is both powerful and failure-prone. Start with the reason it exists: the context window is finite. A small document you can simply paste in whole, and the model sees every word. But scale up, and the window fills. A whole book, let alone a library, won't come close to fitting:
 
 <RetrievalTradeoff />
 

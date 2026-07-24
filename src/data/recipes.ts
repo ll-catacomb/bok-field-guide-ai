@@ -59,7 +59,7 @@ export const RECIPES: Recipe[] = [
     steps: [
       "Split each translation into per-book files",
       "Set your chosen passages beside the original — version against version",
-      "Name the rhetorical figures and mark where the translators quietly diverge",
+      "Name the rhetorical figures and mark where the translators diverge",
     ],
     dish: "Per-book passage files with the Greek and every translation aligned — the comparison you never had time to lay out by hand.",
     why: "The parallel reading you've done in your head for years, finally on the page and shareable.",

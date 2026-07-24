@@ -108,7 +108,7 @@ export function ContextFill() {
         {compactions > 0 && (
           <p className="cf-compact" aria-live="polite">
             <strong>Compaction ({compactions}×).</strong> The window filled, so the
-            tool quietly folded the earlier turns into a short <em>summary</em> and
+            tool folded the earlier turns into a short <em>summary</em> and
             passed that forward. The conversation feels seamless — but the model is
             now working from a lossy summary, not your original words. This is why
             very long conversations drift, lose detail, and grow less precise the

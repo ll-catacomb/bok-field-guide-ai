@@ -72,7 +72,7 @@ export function RagPipeline() {
           <strong>The catch:</strong> retrieval hands over a <em>handful</em> of
           chunks, not the whole document. If the passage you need isn&rsquo;t in
           the top-k, the model never sees it. RAG is fast for &ldquo;search a huge
-          library,&rdquo; but it can quietly fail tasks that must be precise and
+          library,&rdquo; but it can fail tasks that must be precise and
           exhaustive — a close citation, a full literature scan — where you want
           full-context reading instead. Knowing the pipeline is knowing when to
           trust it.

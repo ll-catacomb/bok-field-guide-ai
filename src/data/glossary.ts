@@ -78,7 +78,7 @@ export const GLOSSARY: Record<string, GlossaryEntry> = {
   memory: {
     term: "Memory",
     definition:
-      "A small note a tool writes about you and quietly loads into each new conversation. The simplest form of automatic context — context you never pasted, added for you.",
+      "A small note a tool writes about you and loads into each new conversation. The simplest form of automatic context — context you never pasted, added for you.",
   },
   harness: {
     term: "Harness",
