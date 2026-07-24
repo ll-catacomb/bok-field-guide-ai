@@ -3,10 +3,10 @@
 import { useMemo, useState } from "react";
 import { encode } from "gpt-tokenizer";
 
-// The core function, made literal — with "what the model sees" shown as its own
-// permanent window beside the human view, so no one misses it. Both columns
-// share one grid so their rows (input, divider, output) stay aligned even when
-// the token list wraps to several lines. Pairs with the Tokenizer module below.
+// The core function, made literal, laid out horizontally: input on the left,
+// output on the right, the model flowing between them. English on top (what you
+// see), the same exchange as numbers on the bottom (what the model sees). Pairs
+// with the Tokenizer module below.
 const PROMPT = "Summarize Hamlet's most famous soliloquy in one sentence.";
 const RESPONSE =
   "Hamlet weighs existence against oblivion — whether to endure suffering or end it — and finds that dread of the unknown is what stays his hand.";
@@ -26,12 +26,12 @@ export function StringInStringOut() {
       </div>
       <div className="interactive-body">
         <div className="sio-grid">
-          {/* row 1 — column headers */}
-          <span className="sio-colhead tag">what you see</span>
-          <span className="sio-colhead tag sio-model-head">what the model sees</span>
+          {/* column headers */}
+          <span className="sio-colhead sio-hin tag">string in</span>
+          <span className="sio-colhead sio-hout tag">string out</span>
 
-          {/* row 2 — input */}
-          <div className="sio-block">
+          {/* top row — English (what you see) */}
+          <div className="sio-block sio-ein">
             <span className="sio-lbl">you type — a string</span>
             <textarea
               className="sio-ta"
@@ -44,25 +44,23 @@ export function StringInStringOut() {
               aria-label="prompt"
             />
           </div>
-          <div className="sio-block">
-            <span className="sio-lbl">numbers in</span>
-            <p className="sio-nums">{inNums}</p>
-          </div>
-
-          {/* row 3 — shared divider */}
           <div className="sio-mid" aria-hidden="true">
             <span className="sio-rule" />
-            <span className="tag">LLM ↓</span>
+            <span className="tag">LLM →</span>
             <span className="sio-rule" />
           </div>
-
-          {/* row 4 — output */}
-          <div className="sio-block">
+          <div className="sio-block sio-eout">
             <span className="sio-lbl">you read — a string</span>
             {ran ? <p className="sio-resp">{RESPONSE}</p> : <p className="sio-idle">press run →</p>}
           </div>
-          <div className="sio-block">
-            <span className="sio-lbl">numbers out</span>
+
+          {/* bottom row — numbers (what the model sees) */}
+          <div className="sio-block sio-nin">
+            <span className="sio-lbl sio-model-lbl">numbers in</span>
+            <p className="sio-nums">{inNums}</p>
+          </div>
+          <div className="sio-block sio-nout">
+            <span className="sio-lbl sio-model-lbl">numbers out</span>
             {ran ? <p className="sio-nums">{outNums}</p> : <p className="sio-idle">—</p>}
           </div>
         </div>
@@ -74,30 +72,47 @@ export function StringInStringOut() {
 
         <p className="sio-caption">
           Same exchange, two views. To you it&rsquo;s words in, words out; to the
-          model it&rsquo;s <em>numbers</em> in, numbers out — seen from underneath.
+          model it&rsquo;s <em>numbers</em> in, numbers out, seen from underneath.
         </p>
       </div>
 
       <style>{`
         .sio-grid {
           display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 0.4rem 1rem;
+          grid-template-columns: 1fr auto 1fr;
+          grid-template-areas:
+            "hin  .    hout"
+            "ein  mid  eout"
+            "nin  mid  nout";
+          gap: 0.4rem 0.9rem;
           align-items: stretch;
         }
-        @media (max-width: 600px) { .sio-grid { grid-template-columns: 1fr; } }
-        .sio-colhead { margin-bottom: 0.1rem; align-self: end; }
-        .sio-model-head { color: var(--color-crimson); }
+        .sio-hin { grid-area: hin; align-self: end; }
+        .sio-hout { grid-area: hout; align-self: end; }
+        .sio-ein { grid-area: ein; }
+        .sio-eout { grid-area: eout; }
+        .sio-nin { grid-area: nin; }
+        .sio-nout { grid-area: nout; }
+        .sio-colhead { margin-bottom: 0.1rem; }
         .sio-block { border: 1px solid var(--color-rule); background: var(--color-paper); padding: 0.6rem 0.7rem; min-height: 4.75rem; display: flex; flex-direction: column; gap: 0.3rem; }
         .sio-lbl { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-ash); }
+        .sio-model-lbl { color: var(--color-crimson); }
         .sio-ta { flex: 1; display: block; width: 100%; border: 0; padding: 0; margin: 0; background: transparent; resize: vertical; font-family: var(--font-body); font-size: 15px; line-height: 1.5; color: var(--color-ink); }
         .sio-ta:focus { outline: none; }
         .sio-resp { margin: 0; font-size: 15px; line-height: 1.5; }
         .sio-idle { margin: 0; font-family: var(--font-mono); font-size: 12px; color: var(--color-ash); }
         .sio-nums { margin: 0; font-family: var(--font-mono); font-size: 11px; line-height: 1.7; color: var(--color-crimson); word-break: break-word; }
-        .sio-mid { grid-column: 1 / -1; display: flex; align-items: center; gap: 0.6rem; padding: 0.35rem 0.25rem; }
-        .sio-rule { flex: 1; height: 1px; background: var(--color-rule); opacity: 0.5; }
-        .sio-mid .tag { color: var(--color-crimson); }
+        .sio-mid { grid-area: mid; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; padding: 0 0.3rem; }
+        .sio-rule { width: 1px; flex: 1; min-height: 0.8rem; background: var(--color-rule); opacity: 0.5; }
+        .sio-mid .tag { color: var(--color-crimson); white-space: nowrap; }
+        @media (max-width: 600px) {
+          .sio-grid {
+            grid-template-columns: 1fr;
+            grid-template-areas: "hin" "ein" "nin" "mid" "hout" "eout" "nout";
+          }
+          .sio-mid { flex-direction: row; padding: 0.35rem 0; }
+          .sio-rule { width: auto; height: 1px; flex: 1; }
+        }
         .sio-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; margin-top: 1.25rem; }
         .sio-disclaimer { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-ash); }
         .sio-caption { margin: 1.1rem 0 0; font-style: italic; font-size: 14px; color: var(--color-ink); }
