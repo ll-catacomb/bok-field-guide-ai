@@ -622,7 +622,7 @@ body {
 .doorways {
   max-width: 44rem;
   margin: 0 auto;
-  padding: 0 clamp(1rem, 4vw, 2.5rem) 4rem;
+  padding: 0 clamp(1rem, 4vw, 2.5rem) 1.5rem;
   text-align: center;
 }
 

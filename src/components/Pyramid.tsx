@@ -98,6 +98,11 @@ export function Pyramid() {
         /* The base band needs to reach the bottom corners; a little more height
            keeps its proportions right against the wide foot of the triangle. */
         .pyr-tier:last-child { padding-bottom: 1.6rem; }
+        /* The tiers are buttons, so say so on hover and focus — without a cue
+           the pyramid reads as a static diagram. */
+        .pyr-tier:not(.is-open):hover { background: var(--color-paper); }
+        .pyr-tier:not(.is-open):hover .pyr-name { color: var(--color-crimson); }
+        .pyr-tier:focus-visible { outline: 2px solid var(--color-crimson); outline-offset: -4px; }
         .pyr-tier.is-open { background: var(--color-crimson); }
         .pyr-tier.is-open .pyr-name, .pyr-tier.is-open .pyr-short, .pyr-tier.is-open .pyr-level { color: var(--color-paper); }
         .pyr-level { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; color: var(--color-ash); }
