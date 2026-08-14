@@ -33,9 +33,7 @@ export default function GalleryPage() {
       <article className="reading prose">
         <h2>When a course leans all the way in: from essays to systems</h2>
         <p>
-          For courses ready to go past resilience, integration doesn&rsquo;t mean
-          students consuming a tool someone else built. It means students learning
-          to build with AI themselves. In several Bok-supported courses, a semester
+          The furthest form of integration has students building with AI themselves. In several Bok-supported courses, a semester
           that once ended in a single essay now ends in a working system the
           student designs, tests, and documents — its parts corresponding to the
           intellectual moves of the discipline. The sequence is scaffolded exactly
@@ -43,8 +41,8 @@ export default function GalleryPage() {
           engineering, prompt design, multi-agent orchestration) alongside a
           traditional one (close reading, argument, translation), and each
           intermediate artifact (the source index, the prompt set, the agent
-          specification) is itself assessable, the way an outline and a draft used
-          to be.
+          specification) is itself assessable, the way you would assess an outline
+          and a draft.
         </p>
         <p>
           Two of these techniques map directly onto moves the curriculum already
@@ -63,15 +61,15 @@ export default function GalleryPage() {
           for the principles they&rsquo;re learning.
         </p>
         <p>
-          The skill this develops is less writing every sentence than setting
-          direction, evaluating outputs, and standing behind the result. Students
+          The skill this develops is setting direction, evaluating outputs, and
+          standing behind the result. Students
           learn to read AI&rsquo;s work with a trained eye (for fabricated
           citations, plausible-but-unsupported claims, fluent prose over uncertain
           ground) and to show not that AI is untrustworthy but <em>why this output
           is wrong, and where</em>. Assessment follows the shift: students submit
           finished work with a record of process (what the AI produced, what they
-          verified, what they changed and why) and defend it in conversation. None
-          of this lowers the rigor of the work. It demands more of it.
+          verified, what they changed and why) and defend it in conversation. The
+          work is more demanding than the paper it replaced.
         </p>
 
         <h2>Embodied learning, and where AI fits</h2>

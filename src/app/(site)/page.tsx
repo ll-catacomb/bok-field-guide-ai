@@ -80,8 +80,7 @@ export default function TeachingPage() {
 
         <h2>Further reading — Bok Center guidance</h2>
         <p>
-          This page is a doorway, not a replacement. The Bok Center maintains the
-          fuller, continually updated guidance:
+          The Bok Center maintains the fuller, continually updated guidance:
         </p>
         <ul className="resource-list">
           {BOK_RESOURCES.map((r) => (

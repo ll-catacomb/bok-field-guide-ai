@@ -63,7 +63,7 @@ export default function RecipePage() {
         <p>
           Here is the blank card we hand out. Print it and fill one in for a real
           task you want to bring to your work this week — ingredients, steps, dish.
-          Scoping a single concrete task is the whole exercise.
+          Scope it as small as you can stand.
         </p>
 
         <div className="recipe-pdf-wrap">
@@ -134,7 +134,7 @@ export default function RecipePage() {
 
         <p className="recipe-close">
           Pick the smallest version of the thing you actually want, fill out one
-          card, and cook. That&rsquo;s the whole method. ◊
+          card, and cook. ◊
         </p>
 
         <div className="recipe-next">

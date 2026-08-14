@@ -72,8 +72,20 @@ export const GLOSSARY: Record<string, GlossaryEntry> = {
   compaction: {
     term: "Compaction",
     definition:
-      "When a conversation fills the context window, most tools summarize the older turns and pass the summary forward instead of stopping. The chat feels seamless, but the model is now reasoning from a compressed, lossy recap.",
+      "When a conversation fills the context window, most tools summarize the older turns and pass the summary forward instead of stopping. The chat feels seamless, but the model is now reasoning from a compressed recap with details dropped.",
     aliases: ["compact"],
+  },
+  "high-signal": {
+    term: "High-signal context",
+    definition:
+      "The material in the context window that actually bears on the task — the passage in question, the rubric, one worked example. Because every token you spend crowds out another, curating for signal beats pasting in everything you have.",
+    aliases: ["high signal", "high-signal tokens"],
+  },
+  "lost-in-the-middle": {
+    term: "Lost in the middle",
+    definition:
+      "The tendency of a model to use what sits at the very start and the very end of a long context well, while material buried in the middle gets weaker attention. Put what matters most where it can be seen.",
+    aliases: ["lost in the middle"],
   },
   memory: {
     term: "Memory",
@@ -136,7 +148,7 @@ export const GLOSSARY: Record<string, GlossaryEntry> = {
   mcp: {
     term: "MCP (Model Context Protocol)",
     definition:
-      "An open standard — a universal port, like USB-C — for connecting a harness to external tools and data. Run one small server per service and the harness only ever needs to speak MCP, instead of learning every service's private API.",
+      "An open standard — a universal port, one plug shape every service agrees to accept — for connecting a harness to external tools and data. Run one small server per service and the harness only ever needs to speak MCP, instead of learning every service's private API.",
     aliases: ["Model Context Protocol"],
     links: [
       { text: "modelcontextprotocol.io", href: "https://modelcontextprotocol.io" },

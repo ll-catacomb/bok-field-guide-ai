@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { TIERS } from "@/data/pyramid";
-import { TermText } from "@/components/TermText";
+import { TermText, LinkedText } from "@/components/TermText";
 
 // Three stacked trapezoids, widest at the base. Click a tier to expand its
 // detail panel. Static geometry (no scroll animation yet).
@@ -57,7 +57,7 @@ export function Pyramid() {
             <ul>
               {active.practices.map((p) => (
                 <li key={p}>
-                  <TermText>{p}</TermText>
+                  <LinkedText>{p}</LinkedText>
                 </li>
               ))}
             </ul>
@@ -94,7 +94,7 @@ export function Pyramid() {
            down into the wider part of the triangle so it reads cleanly. */
         .pyr-tier.is-apex { padding-top: 4.8rem; }
         .pyr-tier.is-apex .pyr-name { font-size: 1.2rem; }
-        .pyr-tier.is-apex .pyr-short { max-width: 12rem; font-size: 11px; line-height: 1.35; }
+        .pyr-tier.is-apex .pyr-short { max-width: 14rem; font-size: 13px; line-height: 1.4; }
         /* The base band needs to reach the bottom corners; a little more height
            keeps its proportions right against the wide foot of the triangle. */
         .pyr-tier:last-child { padding-bottom: 1.6rem; }
@@ -105,9 +105,9 @@ export function Pyramid() {
         .pyr-tier:focus-visible { outline: 2px solid var(--color-crimson); outline-offset: -4px; }
         .pyr-tier.is-open { background: var(--color-crimson); }
         .pyr-tier.is-open .pyr-name, .pyr-tier.is-open .pyr-short, .pyr-tier.is-open .pyr-level { color: var(--color-paper); }
-        .pyr-level { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; color: var(--color-ash); }
+        .pyr-level { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; color: var(--color-ash); }
         .pyr-name { font-size: 1.35rem; line-height: 1; color: var(--color-ink); }
-        .pyr-short { font-size: 12px; font-style: italic; color: var(--color-ash); max-width: 26rem; }
+        .pyr-short { font-size: 14px; font-style: italic; color: var(--color-ash); max-width: 26rem; }
         .pyr-base-label { display: block; text-align: center; margin-top: 0.6rem; }
 
         .pyr-detail { margin-top: 2rem; border: 1px solid var(--color-rule); border-left: 3px solid var(--color-crimson); background: var(--color-paper); padding: 1.5rem 1.4rem; }

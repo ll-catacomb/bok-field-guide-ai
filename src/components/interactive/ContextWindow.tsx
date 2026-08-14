@@ -55,9 +55,9 @@ export function ContextWindow() {
       <div className="interactive-body">
         <p className="cw-note">
           Your prompt, the model&rsquo;s reply, and everything after all share one
-          fixed-size <strong>context window</strong> that starts partly full — a
-          system prompt and memory. Add high-signal context and watch the
-          model&rsquo;s room to guess shrink.
+          fixed-size <strong>context window</strong>{" "}
+          that starts partly full — a system prompt and memory. Add material that
+          bears on the task and watch the model&rsquo;s room to guess shrink.
         </p>
 
         <div className="cw-bar" role="img" aria-label="context window fill">

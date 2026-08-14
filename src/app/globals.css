@@ -266,13 +266,16 @@ body {
   margin: 2rem 0 0.6rem;
 }
 
-.prose p {
+/* :where() keeps these at element-only specificity, so a widget's own class
+   rules (.sio-idle, .gr-idle, atlas cells) win instead of inheriting body
+   type — otherwise interactive chrome renders at reading size. */
+:where(.prose) p {
   margin: 0 0 1.3rem;
   font-size: 1.2rem;
   line-height: 1.65;
 }
 
-.prose li {
+:where(.prose) li {
   font-size: 1.2rem;
   line-height: 1.6;
   margin-bottom: 0.5rem;

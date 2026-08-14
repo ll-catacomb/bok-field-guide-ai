@@ -124,3 +124,24 @@ export function wrapChildren(children: React.ReactNode): React.ReactNode {
 export function TermText({ children }: { children: string }) {
   return <>{wrapString(children)}</>;
 }
+
+// Same as TermText, but also renders [label](href) as a link, so data strings
+// (pyramid practices, say) can carry a reference without becoming JSX.
+const MD_LINK = /\[([^\]]+)\]\(([^)]+)\)/g;
+
+export function LinkedText({ children }: { children: string }) {
+  const out: React.ReactNode[] = [];
+  let last = 0;
+  for (const m of children.matchAll(MD_LINK)) {
+    const at = m.index ?? 0;
+    if (at > last) out.push(wrapString(children.slice(last, at)));
+    out.push(
+      <a key={at} href={m[2]} target="_blank" rel="noreferrer">
+        {m[1]}
+      </a>,
+    );
+    last = at + m[0].length;
+  }
+  if (last < children.length) out.push(wrapString(children.slice(last)));
+  return <>{out}</>;
+}
