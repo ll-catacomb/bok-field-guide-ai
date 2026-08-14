@@ -46,8 +46,8 @@ export default function GalleryPage() {
         </p>
         <p>
           Two of these techniques map directly onto moves the curriculum already
-          teaches. <strong>Context engineering</strong> (assembling and indexing
-          every source a task needs in the model&rsquo;s working memory) is a more
+          teaches. <strong>Context engineering</strong>{" "}
+          (assembling and indexing every source a task needs in the model&rsquo;s working memory) is a more
           demanding version of the lit review. <strong>Multi-agent design</strong>{" "}
           (decomposing a task into sub-moves precise enough for an agent to act on)
           forces a student to state explicitly what it means to construct an
@@ -80,8 +80,8 @@ export default function GalleryPage() {
           exams, in-class performance and critique, projects that send students
           into Harvard&rsquo;s physical spaces and collections: these are where a
           great deal of durable learning lives. The Bok Center runs a physical
-          studio and a long practice in the arts and oral performance, and AI is
-          simply one of the supports we offer.
+          studio and has a long history with the arts and oral performance;
+          helping faculty with AI is one part of a much wider practice.
         </p>
         <p>
           Some of that embodied work can loop back into the AI story, if you want
@@ -89,10 +89,10 @@ export default function GalleryPage() {
           photographs, and observations) can turn that first-hand encounter into
           a structured database and then build an argument on top of it: the same{" "}
           ingredients → steps → dish move from the <a href="/recipe">recipe card</a>.
-          But the tie-in is entirely optional. We are just as happy to help you
-          design plain AI-resilient work with no AI integration at all (a seated
-          exam, an oral defense, a studio critique) and to talk through the
-          logistics and the question-writing that make it hold up.
+          But the tie-in is entirely optional. We are glad to work anywhere on
+          the spectrum — from plain AI-resilient work with no AI at all (a seated
+          exam, an oral defense, a studio critique) to courses that integrate AI
+          top to bottom. The examples below run that full range.
         </p>
 
         <hr className="rule-gold" />

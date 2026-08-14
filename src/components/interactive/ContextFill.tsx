@@ -69,7 +69,7 @@ export function ContextFill() {
       <div className="interactive-body">
         <p className="cf-note">
           One message rarely fills the window — but a conversation does. Each
-          message you send adds two blocks, <strong>your message</strong> and the
+          message you send adds two blocks, <strong>your message</strong>{" "}and the
           model&rsquo;s <strong>reply</strong>, and they stack up. Keep sending,
           and watch what happens when it runs out of room.
         </p>

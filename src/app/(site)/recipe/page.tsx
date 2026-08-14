@@ -81,11 +81,11 @@ export default function RecipePage() {
 
         <h2>Start with what you&rsquo;ve been meaning to do</h2>
         <p>
-          The first project you finish is the one you actually care about — the
-          photocopies in the drawer, the translations you&rsquo;ve collected for
-          years, the diagram you could never quite draw. Each of these is a real
-          Learning Lab project, framed as the longing that started it, and each is
-          still nothing more than ingredients, steps, and a dish.
+          Pick something you already want done: the photocopies in the drawer,
+          the translations you&rsquo;ve collected for years, the diagram you could
+          never quite draw. Each card below is a real Learning Lab project that
+          began exactly that way — and each is still nothing more than
+          ingredients, steps, and a dish.
         </p>
       </article>
 
@@ -134,7 +134,7 @@ export default function RecipePage() {
 
         <p className="recipe-close">
           Pick the smallest version of the thing you actually want, fill out one
-          card, and cook. ◊
+          card, and cook.
         </p>
 
         <div className="recipe-next">
@@ -145,7 +145,7 @@ export default function RecipePage() {
             But mostly, we&rsquo;re here for the teaching.
           </p>
           <div className="home-cta">
-            <a href="/" className="cta-btn">Now build it for your students →</a>
+            <a href="/" className="cta-btn">Back to the pyramid: build it for your students →</a>
           </div>
         </div>
       </section>

@@ -1,8 +1,7 @@
 import { Nav } from "@/components/Nav";
 import { SiteFooter } from "@/components/SiteFooter";
 
-// The catalog/field-guide chrome. Wraps every route EXCEPT /claude, which is a
-// full-bleed immersive experience with its own nav, footer, and grain.
+// The site chrome: nav, footer, and grain around every route.
 export default function SiteLayout({
   children,
 }: {

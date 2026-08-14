@@ -69,8 +69,8 @@ export function RagPipeline() {
         </div>
 
         <p className="rag-caveat">
-          <strong>The catch:</strong> retrieval hands over a <em>handful</em> of
-          chunks, not the whole document. If the passage you need isn&rsquo;t
+          <strong>The catch:</strong> retrieval hands over a <em>handful</em>{" "}
+          of chunks, not the whole document. If the passage you need isn&rsquo;t
           among the few retrieved, the model never sees it. RAG is fast for &ldquo;search a huge
           library,&rdquo; but it can fail tasks that must be precise and
           exhaustive — a close citation, a full literature scan — where you want
