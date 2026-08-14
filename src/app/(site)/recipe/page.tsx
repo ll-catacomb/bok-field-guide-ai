@@ -27,11 +27,6 @@ export default function RecipePage() {
             right; leave an ingredient out and it won&rsquo;t.
           </p>
         </div>
-        <img
-          className="hero-figure"
-          src="/cook.png"
-          alt="Woodcut-style illustration of a hand emerging from clouds, holding a serpent over rising flames, printed in red."
-        />
       </section>
 
       <article className="reading prose">

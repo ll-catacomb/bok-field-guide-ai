@@ -36,7 +36,7 @@ export function Pyramid() {
         })}
       </div>
       <div className="pyr-base-label tag" aria-hidden="true">
-        load-bearing ↑ · build from the bottom
+        click any layer to open it · build from the bottom up ↑
       </div>
 
       {active && (
