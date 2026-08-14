@@ -9,7 +9,7 @@ const HANDS = [
 ];
 
 const EYES = [
-  { name: "Read a pasted image", note: "native in today's chat models; a captioning step in text-only setups" },
+  { name: "Read a pasted image", note: "today's chat models can look at an image directly and describe or work from what they see" },
   { name: "Web search + fetch", note: "pull in current information from beyond the training data" },
   { name: "Read files & extract PDF text", note: "open the actual document, spreadsheet, or codebase" },
   { name: "Retrieve (RAG)", note: "search a large library and return only the most relevant passages" },

@@ -31,7 +31,7 @@ export default function RecipePage() {
 
       <article className="reading prose">
         <p className="drop-cap">
-          Every project we built in the workshops has the same three parts. The{" "}
+          Every project we build with faculty has the same three parts. The{" "}
           <Term id="context-window">context window</Term> itself is a recipe card:{" "}
           <strong>ingredients</strong> are
           your inputs, the files, data, and examples you bring; <strong>steps</strong>{" "}

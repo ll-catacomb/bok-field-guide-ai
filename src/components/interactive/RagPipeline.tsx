@@ -28,7 +28,7 @@ const STAGES = [
   },
   {
     label: "Retrieve",
-    body: "Your question is embedded too, and the store returns the handful of chunks whose vectors sit nearest to it — the top-k most relevant passages.",
+    body: "Your question is embedded too, and the store returns the handful of chunks whose vectors sit nearest to it — the few most relevant passages.",
   },
   {
     label: "Into context",
@@ -70,8 +70,8 @@ export function RagPipeline() {
 
         <p className="rag-caveat">
           <strong>The catch:</strong> retrieval hands over a <em>handful</em> of
-          chunks, not the whole document. If the passage you need isn&rsquo;t in
-          the top-k, the model never sees it. RAG is fast for &ldquo;search a huge
+          chunks, not the whole document. If the passage you need isn&rsquo;t
+          among the few retrieved, the model never sees it. RAG is fast for &ldquo;search a huge
           library,&rdquo; but it can fail tasks that must be precise and
           exhaustive — a close citation, a full literature scan — where you want
           full-context reading instead. Knowing the pipeline is knowing when to

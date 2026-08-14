@@ -115,11 +115,11 @@ Each of the tools below wraps the engine in a different amount of software. That
 
 **Chat interfaces** are the exchange at its most literal. You put in a prompt in natural language and read a reply; then you copy what's useful somewhere else to make use of it. *(Claude.ai, ChatGPT, Gemini in the browser.)*
 
-**In-chat live environments** took the first piece of that off your hands: the copying and pasting. Platforms let the output run directly inside the chat: ChatGPT's Code Interpreter, Claude's Artifacts, Gemini's Canvas. Now you could see the output *run* (a chart drawn, a document rendered, a page previewed) without leaving the conversation. The string went in, the string came out, and you could watch it work in the same window.
+**In-chat live environments** take the first piece of that off your hands: the copying and pasting. ChatGPT's Code Interpreter, Claude's Artifacts, and Gemini's Canvas let the output *run* directly inside the chat — a chart drawn, a document rendered, a page previewed — without leaving the conversation. The string goes in, the string comes out, and you watch it work in the same window.
 
-**Editor and document panels** were the next move. Tools like Cursor, Windsurf, and VS Code with Copilot (or Gemini inside a Google Doc) put the model inside the tool where you already work. Now the model didn't just generate text in a chat bubble; it could read your existing files, understand your project or document, and write changes directly in place. The input got richer (your whole project as context) and the output got more useful (edits applied where you need them, not copy-pasted).
+**Editor and document panels** go a step further. Tools like Cursor, Windsurf, and VS Code with Copilot (or Gemini inside a Google Doc) put the model inside the tool where you already work. The model doesn't just generate text in a chat bubble; it reads your existing files, understands your project or document, and writes changes directly in place. The input gets richer (your whole project as context) and the output gets more useful (edits applied where you need them, not copy-pasted).
 
-**Command-line tools** took this further. Tools like Claude Code and Codex run in your terminal and can access your entire machine: not just one project, but your file system, your history, your installed programs. The context window now extends to everything on your local device, and the output can be written anywhere.
+**Command-line tools** go further still. Tools like Claude Code and Codex run in your terminal and can access your entire machine: not just one project, but your file system, your history, your installed programs. The context window extends to everything on your local device, and the output can be written anywhere.
 
 **All-in-one platforms** like Lovable, Replit, and Bolt approach it from the other direction. Instead of giving programmers more control, they take the technical work away from people who aren't programmers. These tools handle not just the writing but the setup and the hosting. You describe what you want and the platform carries it all the way to a running application, without your ever seeing the machinery.
 
@@ -131,7 +131,7 @@ The *engine* never changed. A string goes into a model and a string comes out, i
 
 The mechanism that lets a harness do any of this is the <Term id="tool-call"><strong>tool call</strong></Term>. A tool is any function the model is allowed to invoke, and in every case the model supplies the *judgment* — it recognizes it needs a tool and writes the call — while the tool supplies the *precision*.
 
-You've already seen one. The Python run in the multiplication demo was a tool call: the model couldn't compute the product, so it wrote code (the code is its *output*) and a code executor ran that code and handed the real answer back. The calculation happened in Python, not in the model.
+You've already seen one. The Python run in the multiplication demo was a tool call: the model couldn't compute the product, so it wrote a short program — writing a program is still just producing text — and a separate code-runner executed it and handed the real answer back. The calculation happened in Python, not in the model.
 
 Tools come in two flavors, along the same input/output axis we've been using: tools that give the model **hands** (to *do* more) and tools that give it **eyes** (to *see* more):
 
@@ -139,13 +139,13 @@ Tools come in two flavors, along the same input/output axis we've been using: to
 
 Most tools are ordinary pieces of software, and they give the model abilities it genuinely doesn't have on its own. The companies ship the "right" tools and the documentation for them. And, as we'll see, you can add your own.
 
-### Unpacking a tool call: RAG on a PDF
+### Unpacking a tool call: retrieval on a PDF
 
 Retrieval, the most important of the eyes-side tools, is both powerful and failure-prone. It exists because the context window is finite. A small document you can simply paste in whole, and the model sees every word. But scale up, and the window fills. A whole book, let alone a library, won't come close to fitting:
 
 <RetrievalTradeoff />
 
-That overflow is what <Term id="rag"><strong>RAG</strong></Term> (retrieval-augmented generation) is built for. Instead of loading everything, it loads only the passages most relevant to your question:
+That overflow is what <Term id="rag"><strong>retrieval-augmented generation</strong></Term> — RAG, from here on — is built for. Instead of loading everything, it loads only the passages most relevant to your question:
 
 <RagPipeline />
 
@@ -155,7 +155,7 @@ That word "relevant" has a precise, mechanical meaning. Every <Term id="chunk">c
 
 But that arrangement is a *particular* way of organizing language, not always the *right* one. Where the exact word is the argument (law, medicine, close textual scholarship), near-synonyms like *murder* and *manslaughter* sit side by side in vector space yet are anything but interchangeable. This is why RAG can fail careful academic work: it retrieves what is *similar*, not necessarily what is *right*.
 
-This whole pipeline (window, chunks, vectors, retrieval) is exactly what **NotebookLM, Claude Projects, and custom GPTs** are doing under the hood.
+You never have to build any of this yourself. When you upload sources to **NotebookLM**, attach files to a **Claude Project**, or give a **custom GPT** its reference documents, this whole pipeline (window, chunks, vectors, retrieval) is what runs under the hood — the upload *is* the setup.
 
 ### Reaching out: APIs, keys, and MCP
 
@@ -165,19 +165,23 @@ The eyes and hands so far have mostly stayed inside the chat. But the most power
 
 That works beautifully for one service. The trouble is that every service is different: a different API, a different set of methods, its own documentation, its own key, and all of those change over time. Wiring a harness to a dozen services means a dozen custom connections that someone has to build and keep repairing.
 
+<Term id="mcp"><strong>MCP</strong></Term> (the **Model Context Protocol**) is the fix, and it works the way a standard plug shape does. Everyone agrees on one shape. Each service then gets a small adapter that speaks that shape on the outside and the service's own language on the inside, and holds that service's password. The AI tool only ever has to learn the one shape. Toggle MCP on in the diagram below to watch the tangle straighten out:
+
 <ApiTools />
 
-<Term id="mcp"><strong>MCP</strong></Term> (the **Model Context Protocol**) is the fix, and it works the way a standard plug shape does. Everyone agrees on one shape. Each service then gets a small adapter that speaks that shape on the outside and the service's own language on the inside, and holds that service's password. The AI tool only ever has to learn the one shape. Connecting something new — your library catalog, a lab instrument, a university system — becomes a matter of plugging in another adapter rather than rebuilding the tool. It is what turns "the model can use this" into something you, and not only the company that sold you the tool, can add to.
+Connecting something new — your library catalog, a lab instrument, a university system — becomes a matter of plugging in another adapter rather than rebuilding the tool. And in practice you rarely wire an adapter up by hand: in Claude, ChatGPT, and Gemini these arrive as **connectors** you switch on in the tool's settings, the way you'd add an app to your phone. The standard is what makes "the model can use this" something you, and not only the company that sold you the tool, can add to.
 
 ## The map: what Harvard puts on your desk
 
 Harvard FAS provides affiliates access to all three major providers (**Claude, ChatGPT, and Gemini**), and each appears in several of the surfaces above at once: the same engine, wrapped in a different harness for each.
 
-The atlas arranges them: providers down the side, surfaces across the top, ordered left-to-right from "you see every string" to "the tool handles more for you." When a new tool appears next year, you'll be able to drop it into this same grid.
+The atlas arranges them: providers down the side, surfaces across the top, ordered left-to-right from "you see every string" to "the tool handles more for you."
 
 <HarvardAtlas />
 
-Beyond the tools themselves, the Bok Center's Learning Lab runs hands-on **faculty workshops** on building with them, including a four-day **Claude Code** intensive. The [Claude Code workshop page](/claude) is an asynchronous walkthrough of what that workshop covers past this guide: the handful of *primitives* that turn Claude Code from a chat you talk to into a system you can extend and shape to your own teaching.
+HUIT keeps a live [comparison of the AI tools available to Harvard affiliates](https://www.huit.harvard.edu/ai/tools), and access starts with [a request form](https://harvard.service-now.com/ithelp?id=sc_cat_item&sys_id=53b1914133a083d074dca3813d5c7b2d).
+
+Beyond the tools themselves, the Bok Center's Learning Lab runs hands-on **faculty workshops** on building with them, including intensives on **Claude Code**. The [Claude Code workshop page](/claude) is an asynchronous walkthrough of what those workshops cover past this guide: the handful of *primitives* that turn Claude Code from a chat you talk to into a system you can extend and shape to your own teaching.
 
 <div className="home-cta">
   <a href="/recipe" className="cta-btn">So now what? →</a>

@@ -21,10 +21,10 @@ export type Provider = {
 };
 
 export const SURFACE_COLUMNS: { key: keyof Provider["surfaces"]; label: string; hint: string }[] = [
-  { key: "web", label: "Web UI", hint: "a chat window in the browser — you see every string" },
+  { key: "web", label: "Browser chat", hint: "a chat window (\u201cweb UI\u201d, user interface) — you see every string" },
   { key: "desktop", label: "Desktop app", hint: "the same chat, plus files & voice, on your machine" },
-  { key: "ide", label: "IDE panel", hint: "lives inside your editor; reads your project" },
-  { key: "cli", label: "CLI", hint: "runs in the terminal; reaches your whole file system" },
+  { key: "ide", label: "Editor panel (IDE)", hint: "lives inside your code editor (an IDE, integrated development environment); reads your project" },
+  { key: "cli", label: "Command line (CLI)", hint: "runs in the terminal (a CLI, command-line interface); reaches your whole file system" },
 ];
 
 export const PROVIDERS: Provider[] = [

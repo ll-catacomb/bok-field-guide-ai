@@ -49,7 +49,7 @@ export function ApiTools() {
                   <>
                     <span className="at-wire at-wire-mcp">— MCP →</span>
                     <span className="at-mid">
-                      <span className="at-mid-t">MCP server</span>
+                      <span className="at-mid-t">MCP adapter</span>
                       <span className="at-mid-b">🔑 {s.key} · {s.method}</span>
                     </span>
                     <span className="at-wire">→</span>
@@ -73,9 +73,10 @@ export function ApiTools() {
             <>
               <strong>With MCP</strong> (the Model Context Protocol), the harness
               speaks one standard language. Each service gets a small{" "}
-              <strong>server</strong> that holds its key and translates MCP into
-              that service&rsquo;s own API. Add a new tool by adding a server —
-              nothing in the harness changes, and the keys stay in one place.
+              <strong>adapter</strong> that holds its key and translates the one
+              standard language into that service&rsquo;s own. Add a new service
+              by plugging in another adapter — nothing in the harness changes,
+              and the keys stay in one place.
             </>
           ) : (
             <>

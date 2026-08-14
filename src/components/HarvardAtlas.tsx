@@ -76,14 +76,14 @@ export function HarvardAtlas() {
         .atlas-row + .atlas-row { border-top: 1px solid var(--color-rule); }
         .atlas-head { background: var(--color-paper-deep); }
         .atlas-col-head { padding: 0.6rem 0.7rem; border-left: 1px solid var(--color-rule); display: flex; flex-direction: column; gap: 0.2rem; }
-        .atlas-col-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-crimson); }
-        .atlas-col-hint { font-size: 11px; font-style: italic; color: var(--color-ash); line-height: 1.3; }
+        .atlas-col-label { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-crimson); }
+        .atlas-col-hint { font-size: 12px; font-style: italic; color: var(--color-ash); line-height: 1.3; }
         .atlas-provider-cell { padding: 0.75rem 0.8rem; display: flex; flex-direction: column; gap: 0.35rem; }
         .atlas-provider-name { font-size: 1.35rem; line-height: 1; }
-        .atlas-provider-blurb { font-size: 12px; color: var(--color-ink-soft); line-height: 1.4; }
+        .atlas-provider-blurb { font-size: 13px; color: var(--color-ink-soft); line-height: 1.4; }
         .atlas-cell { padding: 0.75rem 0.7rem; border-left: 1px solid var(--color-rule); display: flex; flex-direction: column; gap: 0.3rem; }
-        .atlas-cell-name { font-family: var(--font-mono); font-size: 12.5px; color: var(--color-ink); }
-        .atlas-cell-note { font-size: 11.5px; color: var(--color-ash); line-height: 1.35; }
+        .atlas-cell-name { font-family: var(--font-mono); font-size: 13.5px; color: var(--color-ink); }
+        .atlas-cell-note { font-size: 12.5px; color: var(--color-ash); line-height: 1.35; }
         .atlas-companions { margin-top: 1.75rem; }
         .atlas-companions ul { list-style: none; margin: 0.6rem 0 0; padding: 0; display: grid; gap: 0.55rem; }
         .atlas-companions li { display: flex; flex-direction: column; gap: 0.15rem; padding-left: 0.9rem; border-left: 2px solid var(--color-gold); }
