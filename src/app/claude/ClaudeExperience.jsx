@@ -840,7 +840,7 @@ function Closing() {
           Build it with the people in the room, capture what emerges, iterate the
           next day. Faculty using AI on their own work (research, writing,
           administration) is the precondition for designing good AI-aware work
-          for students. The field guide is the primer; the recipe card is where
+          for students. The tutorial is the primer; the recipe card is where
           your own first project begins.
         </motion.p>
         <motion.div
@@ -850,8 +850,8 @@ function Closing() {
           <Link href="/recipe" style={linkStyle}>
             Plan your first project →
           </Link>
-          <Link href="/" style={linkAlt}>
-            ← Back to the field guide
+          <Link href="/tutorial" style={linkAlt}>
+            ← Back to the tutorial
           </Link>
         </motion.div>
       </motion.div>
@@ -865,7 +865,7 @@ export default function ClaudeExperience() {
       nav={{
         brand: { name: "Bok Field Guide", sub: "/ Claude Code" },
         links: [
-          { href: "/", label: "← Field Guide" },
+          { href: "/tutorial", label: "← Tutorial" },
           { href: "#signatures", label: "The metaphor" },
           { href: "#story", label: "What happened" },
           { href: "#numbers", label: "By the numbers" },

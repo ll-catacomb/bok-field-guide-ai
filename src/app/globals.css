@@ -617,6 +617,66 @@ body {
   border-color: var(--color-crimson-deep);
 }
 
+/* Front-door "where to go next" block: one primary doorway (the tutorial),
+   then the secondary ones (recipe, gallery). */
+.doorways {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 2.5rem) 4rem;
+  text-align: center;
+}
+
+.doorways .home-cta {
+  margin: 1.75rem 0 0;
+}
+
+.doorway-primary-sub {
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--color-ink-soft);
+  max-width: 30rem;
+  margin: 1rem auto 0;
+}
+
+.doorway-list {
+  list-style: none;
+  margin: 3rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1.75rem;
+  text-align: left;
+}
+
+.doorway-list li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--color-gold);
+}
+
+.doorway-list a {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  letter-spacing: 0.01em;
+  color: var(--color-crimson);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(165, 28, 48, 0.3);
+  align-self: flex-start;
+  padding-bottom: 1px;
+}
+
+.doorway-list a:hover {
+  border-bottom-color: var(--color-crimson);
+}
+
+.doorway-blurb {
+  font-size: 14px;
+  color: var(--color-ink-soft);
+  line-height: 1.45;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

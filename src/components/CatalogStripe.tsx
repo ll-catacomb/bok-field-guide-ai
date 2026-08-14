@@ -1,9 +1,7 @@
-export function CatalogStripe({ slug, id }: { slug: string; id: string }) {
+export function CatalogStripe() {
   return (
     <aside className="catalog-stripe" aria-hidden="true">
-      <span>
-        BOK · LEARNING LAB · {id} · ©2026 · {slug}
-      </span>
+      <span>BOK CENTER · LEARNING LAB · ©2026</span>
     </aside>
   );
 }

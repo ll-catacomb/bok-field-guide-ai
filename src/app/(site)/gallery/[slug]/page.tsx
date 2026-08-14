@@ -35,7 +35,7 @@ export default async function StoryPage({
 
   return (
     <main>
-      <CatalogStripe slug={`/gallery/${slug}`} id="GS" />
+      <CatalogStripe />
 
       <section className="hero story-hero">
         <div className="hero-text">
@@ -98,7 +98,7 @@ export default async function StoryPage({
         .story-facts { display: flex; flex-wrap: wrap; gap: 1.5rem 2.5rem; margin: 1.4rem 0 0; }
         .story-facts dt { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-crimson); margin-bottom: 0.2rem; }
         .story-facts dd { margin: 0; font-size: 14px; color: var(--color-ink-soft); max-width: 34rem; line-height: 1.45; }
-        .story-herofig { max-width: 60rem; margin: 1.5rem auto 0; padding: 0 1.5rem; }
+        .story-herofig { max-width: 60rem; margin: 1.75rem auto 3.25rem; padding: 0 1.5rem; }
         .story-herofig img { width: 100%; height: auto; display: block; border: 1px solid var(--color-rule); }
         .story-prose h2 { font-size: clamp(1.4rem, 2.6vw, 1.8rem); }
         .story-prose blockquote { font-size: 1.05rem; }

@@ -13,11 +13,11 @@ export const metadata: Metadata = {
 export default function RecipePage() {
   return (
     <main>
-      <CatalogStripe slug="/recipe" id="RC04" />
+      <CatalogStripe />
 
       <section className="hero">
         <div className="hero-text">
-          <span className="plate-label">Field Guide · Bok Center · Plate IV</span>
+          <span className="plate-label">Bok Center · Learning Lab</span>
           <h1 className="hero-title">The Recipe Card</h1>
           <hr className="hero-rule" />
           <p className="hero-lede">
@@ -150,7 +150,7 @@ export default function RecipePage() {
             But mostly, we&rsquo;re here for the teaching.
           </p>
           <div className="home-cta">
-            <a href="/teaching" className="cta-btn">Now build it for your students →</a>
+            <a href="/" className="cta-btn">Now build it for your students →</a>
           </div>
         </div>
       </section>

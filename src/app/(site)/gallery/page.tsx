@@ -15,17 +15,17 @@ export default function GalleryPage() {
   const stories = getStories();
   return (
     <main>
-      <CatalogStripe slug="/gallery" id="GA03" />
+      <CatalogStripe />
 
       <section className="hero">
-        <span className="plate-label">Field Guide · Bok Center · Plate III</span>
-        <h1 className="hero-title">The Gallery of Specimens</h1>
+        <span className="plate-label">Bok Center · Learning Lab</span>
+        <h1 className="hero-title">The Gallery</h1>
         <hr className="hero-rule" />
         <p className="hero-lede">
           Project stories from the Learning Lab, alongside a growing list of
           ideas — from faculty, students, and Bok Center fellows — for using AI
-          in teaching, each accessioned by the{" "}
-          <a href="/teaching" className="gal-herolink">
+          in teaching, each tagged with the{" "}
+          <a href="/" className="gal-herolink">
             pyramid
           </a>{" "}
           tier it serves.
@@ -60,12 +60,10 @@ export default function GalleryPage() {
               <span className="gal-more">Read the story →</span>
             </Link>
           ))}
-          {PROJECTS.map((p, i) => (
+          {PROJECTS.map((p) => (
             <article className="gal-card" key={p.key}>
               <div className="gal-cardhead">
-                <span className="gal-plate">
-                  PL00-{String(i + 1).padStart(3, "0")}
-                </span>
+                <span className="gal-plate">Idea</span>
                 <div className="gal-tiers">
                   {p.tiers.map((t) => (
                     <span key={t} className={`gal-tier gal-tier-${t}`}>
