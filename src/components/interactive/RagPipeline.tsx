@@ -74,8 +74,8 @@ export function RagPipeline() {
           among the few retrieved, the model never sees it. RAG is fast for &ldquo;search a huge
           library,&rdquo; but it can fail tasks that must be precise and
           exhaustive — a close citation, a full literature scan — where you want
-          full-context reading instead. Knowing the pipeline is knowing when to
-          trust it.
+          full-context reading instead. Knowing how the pipeline works tells you
+          when to trust it.
         </p>
       </div>
 

@@ -139,10 +139,10 @@ export default function RecipePage() {
 
         <div className="recipe-next">
           <p className="recipe-next-lede">
-            Once you&rsquo;ve cooked one project for yourself, the harder question
-            arrives: how do you build tools that serve a <em>class</em> — not just
-            your own research or curiosity? We&rsquo;re glad to help with research.
-            But mostly, we&rsquo;re here for the teaching.
+            Once you&rsquo;ve cooked one project for yourself, the harder
+            question arrives: how do you build tools that serve a{" "}
+            <em>class</em>, not just your own research? That is what the
+            teaching pyramid is for.
           </p>
           <div className="home-cta">
             <a href="/" className="cta-btn">Back to the pyramid: build it for your students →</a>

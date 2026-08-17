@@ -113,9 +113,9 @@ export function Grounding() {
 
         {ran && (
           <p className="gr-caption">
-            Same model, same question. Asked cold, it confabulates — confidently
+            Same model, same question. Asked cold, it makes things up — confidently
             insisting the scene doesn&rsquo;t exist. Given the source, it simply
-            reads it. The model was never broken; it was ungrounded.
+            reads it. Nothing was wrong with the model — it just didn&rsquo;t have the scene in front of it.
           </p>
         )}
       </div>

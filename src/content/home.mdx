@@ -20,7 +20,7 @@
 
 <div className="reading prose">
 
-<p className="drop-cap">Every week a new AI tool appears: chat windows, writing assistants, research companions, autonomous agents. They look nothing alike. But they are all built on the same engine — and once you understand it, you can make sense of any tool, current or future, because you know what it is actually doing underneath.</p>
+<p className="drop-cap">Every week a new AI tool appears: chat windows, writing assistants, research companions, autonomous agents. They look nothing alike, but they are all built on the same engine. Understand the engine and you can make sense of any of them, current or future.</p>
 
 This guide is for teachers, and assumes no coding experience. It starts at the center (the exchange every one of these tools wraps around) and works outward to the specific tools Harvard provides, so that when a colleague mentions "the CLI" or "a custom GPT," you can place it on a map.
 
@@ -32,7 +32,7 @@ Even here there is more than one kind of machine. The same companies build <Term
 
 We won't cover how an LLM is built or trained. That story is told well elsewhere by Andrej Karpathy, [*Deep Dive into LLMs like ChatGPT*](https://www.youtube.com/watch?v=7xTGNNLPyMI).
 
-What you need is a feel for how an LLM actually behaves — what it does well and where it breaks. That is enough to parse what any given AI tool is doing. The short demonstrations below are built to give you that.
+What you need is a feel for how an LLM actually behaves — what it does well and where it breaks. The short demonstrations below give you that.
 
 ## The engine: string in, string out
 
@@ -44,7 +44,7 @@ Type a prompt into the box below and press run:
 
 <StringInStringOut />
 
-Every tool in this guide packages operations around this one exchange. Text in, text out; everything else is scaffolding.
+Every tool in this guide is built around this one exchange; the rest of the software just prepares the input and handles the output.
 
 ## It's all tokens
 
@@ -52,13 +52,13 @@ Look again at the bottom row of that demo: the words have turned into numbers. T
 
 <Tokenizer />
 
-The splits aren't ours; they reflect what the model saw at scale. This is why models miscount letters and stumble on rare names.
+The splits aren't ours; they come from the training data. This is why models miscount letters and stumble on rare names.
 
 ## How your LLM was trained
 
 So how did numbers ever become good text? By prediction, practiced at enormous scale. A model learns exactly one move (*given the text so far, guess what comes next*) and repeats it, billions of times, against a vast library of writing.
 
-The New York Times built a tiny version you can watch learn. Their [*BabyGPT*](https://www.nytimes.com/interactive/2023/04/26/upshot/gpt-from-scratch.html) is trained on the novels of Jane Austen and does just one thing: predict the next character, over and over, until a sentence forms. At first it produces pure noise. No one programs in spelling, words, or grammar; those emerge, rung by rung, purely from predicting the next character against Austen's prose. Click through its training:
+The New York Times built a tiny version you can watch learn. Their [*BabyGPT*](https://www.nytimes.com/interactive/2023/04/26/upshot/gpt-from-scratch.html) is trained on the novels of Jane Austen and does just one thing: predict the next character, over and over, until a sentence forms. At first it produces pure noise. No one programs in spelling, words, or grammar; they emerge from prediction alone. Click through its training:
 
 <TrainingProgression />
 
@@ -88,17 +88,17 @@ The budget doesn't reset between messages. It fills as the conversation grows. W
 
 <ContextFill />
 
-When the window fills, most tools <Term id="compaction"><strong>compact</strong></Term> rather than stop: they summarize the older messages and pass the summary forward, so the chat feels seamless. The catch is that the model is now reasoning from a compressed recap with details dropped — the reason a very long thread loses the thread.
+When the window fills, most tools <Term id="compaction"><strong>compact</strong></Term> rather than stop: they summarize the older messages and pass the summary forward, so the chat feels seamless. The catch is that the model is now working from a compressed recap with details dropped — which is why a very long conversation starts forgetting things from earlier.
 
 ## Memory: the first automatic context
 
-If every new chat starts with an empty window, how does a tool ever seem to remember you? By keeping a <Term id="memory"><strong>memory</strong></Term>: a small note it writes and loads into each new thread. It's the simplest form of *automatic context*, context you never pasted, added for you.
+If every new chat starts with an empty window, how does a tool ever seem to remember you? By keeping a <Term id="memory"><strong>memory</strong></Term>: a small note it writes and loads into each new thread. It's the simplest form of *automatic context* — context added for you that you never pasted.
 
 <Memory />
 
-## Why the tools exist
+## The skill underneath: context engineering
 
-Those two limits — what a model can work out, and how much it can hold at once — are what all of these tools are built to work around. Curating what goes in has a name:
+Everything so far points at one skill: deciding what goes into the window. The field calls it context engineering:
 
 <blockquote>
   <p><em>"Good context engineering means finding the smallest possible set of high-signal tokens that maximize the likelihood of some desired outcome."</em></p>
@@ -111,33 +111,33 @@ That covers what goes in. Getting the answer back out has its own history.
 
 In the earliest way of working, you'd get text back from the chat window, read it, copy it, paste it into a file or a document, and take it somewhere else to see if it worked. If it didn't, you'd go back to the chat, describe what went wrong, and iterate. The model wrote the text; moving it, testing it, and bringing the results back were all your job.
 
-Each of the tools below wraps the engine in a different amount of software. That wrapper has a name — the <Term id="harness"><strong>harness</strong></Term> — and its job is to gather up what goes in and then act on what comes out. A chat window is a thin wrapper: it hands you the text, and the copying, testing, and fixing are yours. A coding agent is a thick one: it takes what the model wrote and does those things itself. Each tool below takes on a little more of that work than the one before. As you read, the useful question is how much you want to see: every step, or only the finished result.
+Each of the tools below wraps the engine in a different amount of software. That wrapper has a name — the <Term id="harness"><strong>harness</strong></Term> — and its job is to gather up what goes in and then act on what comes out. A chat window is a thin wrapper: it hands you the text, and the copying, testing, and fixing are yours. A coding agent is a thick one: it does those things itself. As you read, ask how much you want to see — every step, or only the finished result.
 
-**Chat interfaces** are the exchange at its most literal. You put in a prompt in natural language and read a reply; then you copy what's useful somewhere else to make use of it. *(Claude.ai, ChatGPT, Gemini in the browser.)*
+**Chat interfaces** are the exchange at its most literal. You type a prompt, read the reply, and copy what's useful somewhere else. *(Claude.ai, ChatGPT, Gemini in the browser.)*
 
 **In-chat live environments** take the first piece of that off your hands: the copying and pasting. ChatGPT's Code Interpreter, Claude's Artifacts, and Gemini's Canvas let the output *run* directly inside the chat — a chart drawn, a document rendered, a page previewed — without leaving the conversation. The string goes in, the string comes out, and you watch it work in the same window.
 
 **Editor and document panels** go a step further. Tools like Cursor, Windsurf, and VS Code with Copilot (or Gemini inside a Google Doc) put the model inside the tool where you already work. The model doesn't just generate text in a chat bubble; it reads your existing files, understands your project or document, and writes changes directly in place. The input gets richer (your whole project as context) and the output gets more useful (edits applied where you need them, not copy-pasted).
 
-**Command-line tools** go further still. Tools like Claude Code and Codex run in your terminal and can access your entire machine: not just one project, but your file system, your history, your installed programs. The context window extends to everything on your local device, and the output can be written anywhere.
+**Command-line tools** go further still. Tools like Claude Code and Codex run in the terminal — the typed, text-only window — and can access your entire machine: not just one project, but your file system, your history, your installed programs. The context window extends to everything on your local device, and the output can be written anywhere.
 
 **All-in-one platforms** like Lovable, Replit, and Bolt approach it from the other direction. Instead of giving programmers more control, they take the technical work away from people who aren't programmers. These tools handle not just the writing but the setup and the hosting. You describe what you want and the platform carries it all the way to a running application, without your ever seeing the machinery.
 
 <Term id="agent"><strong>Autonomous agents</strong></Term> are the final step, so far. Agent modes in Cursor and Claude Code (and standalone agents) don't wait for your prompts. You give them your files, your tools, your passwords, and a memory that carries over, and they drive. You don't control the string in or the string out; you rarely even see the intermediate steps. You just see the final product. This is powerful, and it is genuinely dangerous: an agent can rack up costs, introduce errors, and make irreversible changes without asking.
 
-The *engine* never changed. A string goes into a model and a string comes out, in every one of these. What changes is how much software sits between you and that exchange — and whether, for the task in front of you, it is helping or hiding the work.
+The *engine* never changed. A string goes into a model and a string comes out, in every one of these. What changes is how much software sits between you and that exchange — and whether, for the task in front of you, that software is helping you or hiding steps you need to see.
 
 ## Tool calls: giving the model hands and eyes
 
-The mechanism that lets a harness do any of this is the <Term id="tool-call"><strong>tool call</strong></Term>. A tool is any function the model is allowed to invoke, and in every case the model supplies the *judgment* — it recognizes it needs a tool and writes the call — while the tool supplies the *precision*.
+The mechanism that lets a harness do any of this is the <Term id="tool-call"><strong>tool call</strong></Term>. A tool is anything the harness lets the model use — a calculator, a file reader, a web search. The model supplies the *judgment*: it notices it needs the tool and asks. The tool supplies the *precision*.
 
 You've already seen one. The Python run in the multiplication demo was a tool call: the model couldn't compute the product, so it wrote a short program — writing a program is still just producing text — and a separate code-runner executed it and handed the real answer back. The calculation happened in Python, not in the model.
 
-Tools come in two flavors, along the same input/output axis we've been using: tools that give the model **hands** (to *do* more) and tools that give it **eyes** (to *see* more):
+Tools come in two kinds: those that give the model **hands** (to *do* more) and those that give it **eyes** (to *see* more):
 
 <ToolCategories />
 
-Most tools are ordinary pieces of software, and they give the model abilities it genuinely doesn't have on its own. The companies ship the "right" tools and the documentation for them. And, as we'll see, you can add your own.
+Most tools are ordinary pieces of software, and they give the model abilities it doesn't have on its own. Each provider ships a standard set; as we'll see, you can also add your own.
 
 ### Unpacking a tool call: retrieval on a PDF
 
@@ -163,7 +163,7 @@ The eyes and hands so far have mostly stayed inside the chat. But the most power
 
 <ApiHandshake />
 
-That works beautifully for one service. The trouble is that every service is different: a different API, a different set of methods, its own documentation, its own key, and all of those change over time. Wiring a harness to a dozen services means a dozen custom connections that someone has to build and keep repairing.
+That works for one service. The trouble is that every service is different: a different API, a different set of methods, its own documentation, its own key, and all of those change over time. Wiring a harness to a dozen services means a dozen custom connections that someone has to build and keep repairing.
 
 <Term id="mcp"><strong>MCP</strong></Term> (the **Model Context Protocol**) is the fix, and it works the way a standard plug shape does. Everyone agrees on one shape. Each service then gets a small adapter that speaks that shape on the outside and the service's own language on the inside, and holds that service's password. The AI tool only ever has to learn the one shape. Toggle MCP on in the diagram below to watch the tangle straighten out:
 

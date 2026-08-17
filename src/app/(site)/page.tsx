@@ -30,13 +30,11 @@ export default function TeachingPage() {
         <p className="drop-cap">
           It is tempting to start with the exciting part — the custom tutor, the
           AI feedback engine, the simulation. But integration is the top of a
-          pyramid, and a pyramid is only as sound as what holds it up. Read it the
-          way you would read Maslow&rsquo;s hierarchy of needs: each tier&rsquo;s
-          needs must be met before the one above it even comes into reach. A
-          course can&rsquo;t be made AI-resilient until its goals are clear, and AI
+          pyramid, and a pyramid is only as sound as what holds it up: a course
+          can&rsquo;t be made AI-resilient until its goals are clear, and AI
           can&rsquo;t be integrated well into a course that isn&rsquo;t resilient.
-          Click on each layer of the pyramid below, starting at the base, to see
-          what that tier asks of a course.
+          Click each layer below, starting at the base, to see what that tier
+          asks of a course.
         </p>
 
         <Pyramid />

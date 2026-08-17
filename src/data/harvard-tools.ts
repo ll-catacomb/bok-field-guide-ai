@@ -36,7 +36,7 @@ export const PROVIDERS: Provider[] = [
       web: { name: "claude.ai", note: "chat, Projects, and Artifacts (live-rendered documents & apps)" },
       desktop: { name: "Claude Desktop", note: "Mac & Windows app; connects to local files via MCP" },
       ide: { name: "Claude Code in VS Code / JetBrains", note: "editor extension that reads and edits your project" },
-      cli: { name: "Claude Code", note: "terminal agent with access to your files, git, and shell" },
+      cli: { name: "Claude Code", note: "agent in the terminal with access to your files and the programs on your machine" },
     },
   },
   {
@@ -46,8 +46,8 @@ export const PROVIDERS: Provider[] = [
     surfaces: {
       web: { name: "chatgpt.com", note: "chat, Code Interpreter (runs Python), and custom GPTs" },
       desktop: { name: "ChatGPT Desktop", note: "Mac & Windows app with screen and voice access" },
-      ide: { name: "Codex / Copilot in VS Code", note: "in-editor assistance and inline completions" },
-      cli: { name: "Codex CLI", note: "terminal coding agent that runs against your repo" },
+      ide: { name: "Codex / Copilot in VS Code", note: "suggestions and edits inside your editor as you work" },
+      cli: { name: "Codex CLI", note: "coding agent in the terminal that works on your project folder" },
     },
   },
   {

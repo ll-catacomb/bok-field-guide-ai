@@ -74,8 +74,8 @@ export default function GalleryPage() {
 
         <h2>Embodied learning, and where AI fits</h2>
         <p>
-          Not every answer to AI is an AI answer. We genuinely care about
-          embodied, preserved learning for its own sake — the kind that happens
+          Some of the best responses to AI involve no AI at all. We genuinely
+          care about embodied, preserved learning for its own sake — the kind that happens
           in a room, in a voice, in the body, in an archive. Seated and oral
           exams, in-class performance and critique, projects that send students
           into Harvard&rsquo;s physical spaces and collections: these are where a

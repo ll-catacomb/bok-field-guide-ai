@@ -94,7 +94,7 @@ export const RECIPES: Recipe[] = [
       "Name the bridge to your own work; mark speculation as speculation",
     ],
     dish: "One self-contained HTML brief per paper, plus an index that finally puts them in a single conversation.",
-    why: "Not a lit review you owe someone — the synthesis you've wanted to see for your own thinking.",
+    why: "The synthesis you've wanted to see for your own thinking.",
   },
   {
     key: "unfinished-interviews",
